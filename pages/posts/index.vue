@@ -3,8 +3,7 @@
         <div class="posts">
             <div class="post" v-for="(post, index) in posts" :key="post.id">
                 <div class="grid">
-                    <post-card :title="post.title.rendered" :excerpt="post.excerpt.rendered" :id="post.id" :nr="index" :date="formatDate(post.date).date" :time="formatDate(post.date).time" :image="post.
-                    _embedded['wp:featuredmedia']['0'].source_url"></post-card>
+                    <post-card :title="post.title.rendered" :excerpt="post.excerpt.rendered" :id="post.id" :nr="index" :date="formatDate(post.date).date" :time="formatDate(post.date).time" :image="post._embedded['wp:featuredmedia']['0'].source_url" :slug="post.slug"></post-card>
                 </div>
             </div>
         </div>
@@ -54,7 +53,6 @@
 
     .posts > * {
         display: block;
-        // margin-top: 30px;
         margin-bottom:40px;
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="'/posts/' + title" class="grid">
+    <nuxt-link :to="'/posts/' + slug" class="grid">
         <div class="post-card-date-container">
             <p class="date-post-card" v-html="date"></p>
             <p class="time-post-card" v-html="time"></p>
@@ -19,12 +19,12 @@
     export default {
         props: [
             'nr',
-            'id',
             'title',
             'excerpt',
             'image',
             'date',
-            'time'
+            'time',
+            'slug'
         ]
     }
 </script>

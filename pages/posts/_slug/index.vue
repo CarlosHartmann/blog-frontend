@@ -1,8 +1,8 @@
 <template>
     <section class="single-post container">
         <template class="post container" v-for="(post, index) in posts">
-            <template v-if="$route.params.title == post.title.rendered">
-                <post :title="post.title.rendered" :content="post.content.rendered" :id="post.id" :nr="index"></post>
+            <template v-if="$route.params.slug == post.slug">
+                <post :title="post.title.rendered" :content="post.content.rendered" :id="post.id" :nr="index" :slug="post.slug"></post>
             </template>
         </template>
     </section>
