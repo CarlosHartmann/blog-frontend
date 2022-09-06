@@ -44,7 +44,7 @@ a{
 }
 
 a:hover{
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 *,
@@ -115,6 +115,10 @@ main{
     &:hover {
         color:black;
         background-color: white;
+    }
+
+    :hover {
+        text-decoration:underline;
     }
 }
 

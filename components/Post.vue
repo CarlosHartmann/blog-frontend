@@ -1,6 +1,6 @@
 <template>
     <div class="grid container main-grid">
-        <nuxt-link class="back-button" to="/posts"><p class="button">ᐊ Back</p></nuxt-link>
+        <back-button class="back-button"></back-button>
         <h3 class="post-title" v-html="title"></h3>
         <div class="paper-bg"></div>
         <div class="post-images no-text" v-html="content"></div>
@@ -9,13 +9,19 @@
 </template>
 
 <script>
+    import BackButton from '@/components/BackButton'
+
     export default {
         props: [
             'nr',
             'id',
             'title',
             'content',
+            'slug',
         ],
+        components: {
+            BackButton
+        },
     }
 </script>
 
@@ -24,10 +30,6 @@
         padding: $unit calc(2*$unit) calc(2*$unit) calc(2*$unit);
         grid-row: 2 !important;
         grid-column: 2;
-
-        :deep p > img {
-            display: none;
-        }
     }
 
     .post-images{
@@ -37,6 +39,7 @@
         :deep img {
             width:100%;
             height:auto;
+            padding-bottom: $unit;
         }
     }
 

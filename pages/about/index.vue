@@ -2,7 +2,7 @@
     <div class="container">
         <template v-for="page in pages">
             <div class="grid main-grid" v-if="page.title.rendered == 'About'">
-                <h3 class="about-title" v-html="page.title.rendered"></h3>
+                <back-button class="about-back-button"></back-button>
                 <div class="about-content no-images" v-html="page.content.rendered"></div>
                 <div class="about-images no-text" v-html="page.content.rendered"></div>
             </div>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+    import BackButton from '@/components/BackButton'
+
     export default {
         head() {
             return {
@@ -20,6 +22,9 @@
                     {hid: 'ogtitle', property: 'og:title', content: 'Contact page'}
                 ]
             }
+        },
+        components: {
+            BackButton
         },
         data() {
             return {
@@ -36,8 +41,11 @@
 </script>
 
 <style scoped lang="scss">
-    .about-images{
-        display: flex;
-        justify-content: right;
+    .about-back-button{
+        grid-column:1;
+    }
+
+    .about-content{
+        grid-column:2;
     }
 </style>
