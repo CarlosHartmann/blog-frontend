@@ -1,0 +1,132 @@
+$unit: 10px;
+
+@font-face {
+    font-family: "Sinistre";
+    src: url('~assets/fonts/Sinistre-S†Caroline.otf');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('~assets/fonts/RobotoMono-Regular.ttf');
+}
+
+html {
+    font-family: Roboto;
+    font-size: 12px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    background-color: #1c1a18;
+    color: white;
+    height:100%;
+}
+
+body{
+    height:100%;
+}
+
+h3{
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.container{
+    width:100%;
+    height:100%;
+}
+
+a{
+    color:white;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+
+.grid {
+    display: grid;
+    grid-template-columns: 14vw 4fr 3fr;
+    grid-template-rows: 1fr;
+    height:100%;
+    position: relative;
+    grid-gap:$unit;
+}
+
+.main-grid{
+    padding-top:300px;
+    min-height:100%;
+    max-height: auto;
+    padding-left:$unit;
+    padding-right:$unit;
+}
+
+.paper-bg {
+    grid-column: 2;
+    background-image: url('~/assets/images/paper-tex.jpg');
+    background-size: 100% auto;
+    grid-row:1;
+    color: black;
+}
+
+.grid-item-c3 {
+    grid-column: 3;
+}
+
+main{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.text-body{
+    color: black;
+    font-size: 16px;
+    font-family: serif;
+    line-height: 140%;
+}
+
+.drop-cap {
+    :first-child:first-letter {
+        float: left;
+        font-family: Sinistre;
+        font-size: 120px;
+        line-height: 90px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+    }
+}
+
+.button{
+    text-transform: uppercase;
+    width:auto;
+
+    &:hover {
+        color:black;
+        background-color: white;
+    }
+}
+
+
+.no-text{
+    p {
+        font-size: 0;
+    }
+}
+
+.no-images {
+    p > img {
+        display:none;
+    }
+}
