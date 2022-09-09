@@ -78,6 +78,7 @@
             border-width: 1px;
             margin: $unit 0 calc(2*$unit) 0;
             padding: $unit;
+            color: white;
         }
     }
 
