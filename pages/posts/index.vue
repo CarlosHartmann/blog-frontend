@@ -57,6 +57,6 @@
     }
 
     .posts > *:last-child {
-        margin-bottom: 100px;
+        margin-bottom: 400px;
     }
 </style>
