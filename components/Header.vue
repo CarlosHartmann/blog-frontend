@@ -31,7 +31,7 @@
         width:100%;
         height:40px;
         display:flex;
-        justify-content: end;
+        justify-content: right;
         z-index: 20;
 
         ul {
@@ -39,12 +39,7 @@
             padding: 0;
             display: flex;
 
-            ul {
-                display: none;
-            }
-
             li {
-                margin-right: 20px;
                 padding: 10px;
             }
         }
