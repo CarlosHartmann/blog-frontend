@@ -3,7 +3,20 @@
         <template v-for="(page, index) in pages">
             <div class="grid main-grid" v-if="page.title.rendered == 'Contact'">
                 <back-button class="back-button"></back-button>
-                <div class="contact-content" v-html="page.content.rendered"></div>
+                <form name="contact" method="POST" data-netlify="true">
+                    <p>
+                        <label>Name<input type="text" name="name" /></label>
+                    </p>
+                    <p>
+                        <label>Email<input type="email" name="email" /></label>
+                    </p>
+                    <p>
+                        <label>Message<textarea name="message"></textarea></label>
+                    </p>
+                    <p>
+                        <button class="button" type="submit">Send</button>
+                    </p>
+                    </form>
             </div>
         </template>
     </div>
@@ -48,5 +61,37 @@
     .back-button{
         grid-row:1;
         grid-column:1;
+    }
+
+    form {
+        width: calc(100% - $unit);
+        label {
+            width:100%;
+            @extend h3
+        }
+
+        input, textarea {
+            width:100%;
+            border-color: white;
+            background-color: $bg-color;
+            border-style: solid;
+            border-width: 1px;
+            margin: $unit 0 calc(2*$unit) 0;
+            padding: $unit;
+        }
+    }
+
+    .button{
+        border-style: solid;
+        border-color: white;
+        border-width:1px;
+        background-color: white;
+        color: black;
+
+        &:hover{
+            background-color: $bg-color;
+            text-decoration: underline;
+            color: white;
+        }
     }
 </style>
