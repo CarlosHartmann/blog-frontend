@@ -34,14 +34,13 @@
         grid-column: 1 /4;
 
         &:hover{
-            text-decoration: underline;
             img {
                 visibility: visible;
             }
-        }
 
-        :hover{
-            text-decoration: underline;
+            p, div {
+                text-decoration: underline;
+            }
         }
     }
 

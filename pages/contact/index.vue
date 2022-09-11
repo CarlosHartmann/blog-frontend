@@ -80,6 +80,11 @@
             padding: $unit;
             color: white;
         }
+
+        textarea {
+            resize: vertical;
+            height: 400px;
+        }
     }
 
     .button{

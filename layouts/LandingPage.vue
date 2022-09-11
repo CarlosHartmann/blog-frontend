@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="landing-page container">
         <Header />
-        <h1>Page View</h1>
         <nuxt />
     </div>
 </template>
