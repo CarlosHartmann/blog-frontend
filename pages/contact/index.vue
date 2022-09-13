@@ -4,7 +4,7 @@
             <div class="grid main-grid" v-if="page.title.rendered == 'Contact'">
                 <back-button class="back-button"></back-button>
                 <form name="contact" method="POST" data-netlify="true" onSubmit="submit">
-                    <input type="hidden" name="form-name" value="contact">
+                    <input type="hidden" name="form-name" value="Contact">
 
                     <p>
                         <label>Name<input type="text" name="name" /></label>
