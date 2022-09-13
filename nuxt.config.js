@@ -2,6 +2,7 @@ import pkg from './package'
 
 export default {
     target: 'static',
+    ssr: true,
     head: {
         title: pkg.name,
         meta: [

@@ -1,7 +1,7 @@
 <template>
-    <a @click="goToPrev()">
+    <div @click="goToPrev()">
         <p class="button">ᐊ Back</p>
-    </a>
+    </div>
 </template>
 
 <script>
