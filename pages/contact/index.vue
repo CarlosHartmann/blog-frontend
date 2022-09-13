@@ -10,7 +10,7 @@
                     onSubmit="submit"
                     data-netlify-honeypot="bot-field"
                     action="/contact/thankyou/">
-                    
+
                     <input type="hidden" name="form-name" value="contact">
 
                     <p>
@@ -23,7 +23,7 @@
                         <label>Message<textarea name="message" required ></textarea></label>
                     </p>
                     <p>
-                        <button class="button" type="submit">Send</button>
+                        <button class="button" value="Send Message" type="submit">Send</button>
                     </p>
 
                     </form>
