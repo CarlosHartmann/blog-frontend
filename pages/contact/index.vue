@@ -3,7 +3,9 @@
         <template v-for="(page, index) in pages">
             <div class="grid main-grid" v-if="page.title.rendered == 'Contact'">
                 <back-button class="back-button"></back-button>
-                <form name="contact" method="POST" data-netlify="true">
+                <form name="contact" method="POST" data-netlify="true" onSubmit="submit" data-netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact">
+
                     <p>
                         <label>Name<input type="text" name="name" /></label>
                     </p>
@@ -16,6 +18,7 @@
                     <p>
                         <button class="button" type="submit">Send</button>
                     </p>
+
                     </form>
             </div>
         </template>
