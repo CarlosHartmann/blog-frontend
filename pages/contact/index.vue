@@ -6,10 +6,10 @@
                 <form 
                     name="contact"
                     method="POST"
-                    data-netlify="true"
+                    netlify
                     onSubmit="submit"
                     data-netlify-honeypot="bot-field"
-                    action="/contact/thankyou/">
+                    action="/thankyou/">
 
                     <input type="hidden" name="form-name" value="contact">
 
