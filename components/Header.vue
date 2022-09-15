@@ -1,11 +1,16 @@
 <template>
-    <header class="header">
+    <header class="header" :class="showMobileMenu ? 'open' : 'closed'">
+        <div class="hamburger-background"></div>
         <ul>
-            <li><nuxt-link to="/">Home</nuxt-link></li>
-            <li><nuxt-link to="/posts">Blog</nuxt-link></li>
-            <li><nuxt-link to="/about">About</nuxt-link></li>
-            <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+            <li @click="showMobileMenu = false"><nuxt-link to="/">Home</nuxt-link></li>
+            <li @click="showMobileMenu = false" ><nuxt-link to="/posts">Blog</nuxt-link></li>
+            <li @click="showMobileMenu = false" ><nuxt-link to="/about">About</nuxt-link></li>
+            <li @click="showMobileMenu = false" ><nuxt-link to="/contact">Contact</nuxt-link></li>
         </ul>
+        <div class="hamburger-container" @click="showMobileMenu = !showMobileMenu">
+            <div class="hamburger-line">
+            </div>
+        </div>
     </header>
 </template>
 
@@ -13,6 +18,7 @@
     export default {
         data() {
             return {
+                showMobileMenu: false,
                 pages: [],
             }
         },
@@ -22,6 +28,11 @@
             return { pages }
         },
         fetchOnServer: true,
+        methods: {
+            showMobileMenu: function () {
+                this.$emit( 'showMobileMenu' );
+            }
+        }
     }
 </script>
 
@@ -42,7 +53,6 @@
             display: flex;
             border-style: solid;
             border-color: white;
-            border-width: 1px;
             justify-content: space-between;
             align-items: center;
             color: black !important;
@@ -67,5 +77,111 @@
                 margin-right: 0px;
             }
         }
+
+        .hamburger-container {
+            visibility: hidden;
+        }
+    }
+
+
+    @media only screen and (max-width: $tablet-max-res) {
+        .header {
+            display: flex;
+            justify-content: right !important;
+            padding: calc(2 * $unit);
+            transition: all .5s ease-in-out;
+
+            ul {
+                border-style: none;
+                opacity: 0;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                left:0;
+                top:0;
+                right:0;
+                bottom:0;
+                width:100%;
+                position:fixed;
+                margin: 0;
+                padding: 0;
+                visibility: hidden;
+                
+                li {
+                    width:100%;
+                    display: flex;
+                    justify-content: center;
+                    margin: 0px;
+                    z-index: 100;
+                }
+            }
+
+            .hamburger-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-style: solid;
+                border-color: white;
+                height: 50px;
+                width: 50px;
+                background-color: $bg-color;
+                position: fixed;
+                visibility: visible;
+
+                .hamburger-line{
+                    background-color: white;
+                    height: 3px;
+                    width: calc(60px - 3 * $unit);
+                    transition: all .5s ease-in-out;
+                }
+
+                .hamburger-line::before, .hamburger-line::after{
+                    @extend .hamburger-line;
+                    content: '';
+                    position: absolute;
+                }
+
+                .hamburger-line::before{
+                    transform: translateY(-10px);
+                }
+
+                .hamburger-line::after {
+                    transform: translateY(10px);
+                }
+            }
+
+            .hamburger-background {
+                position: fixed;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+                background-color: $bg-color;
+                opacity: 0;
+                visibility: hidden;
+                transition: all .3s ease-in-out;
+            }
+        }
+
+        .header.open{
+            background-color: $bg-color;
+
+            .hamburger-container{
+                .hamburger-line{
+                    position: absolute;
+                    transform: translateY(0px) rotate(45deg);
+    
+                    &::before, &::after{
+                        transform: rotate(-90deg);
+                    }
+                }
+            }
+
+            ul, .hamburger-background {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
     }
 </style>

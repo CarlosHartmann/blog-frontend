@@ -60,4 +60,18 @@
     .single-post .grid {
         grid-template-rows: auto 1fr;
     }
+
+    @media only screen and (max-width: $mobile-res) {
+        .paper-bg, .post-title, .post-images, .post-content {
+            grid-column: 1;
+        }
+
+        .post-content {
+            grid-row:2;
+        }
+
+        .post-images {
+            grid-row:3;
+        }
+    }
 </style>

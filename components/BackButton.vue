@@ -1,5 +1,5 @@
 <template>
-    <div @click="goToPrev()">
+    <div class="button-holder" @click="goToPrev()">
         <p class="button">ᐊ Back</p>
     </div>
 </template>
@@ -14,3 +14,11 @@
         },
     }
 </script>
+
+<style scoped lang="scss">
+    @media only screen and (max-width: $mobile-res) {
+        .button-holder {
+            display: none;
+        }
+    }
+</style>

@@ -48,4 +48,37 @@
     .about-content{
         grid-column:2;
     }
+
+    .about-images{
+        :deep img {
+            width:100% !important;
+            height: auto !important;
+        }
+    }
+
+    @media only screen and (max-width: $tablet-max-res){
+        .about-images{
+            grid-column:2 !important;
+            grid-row:1 !important;
+        }
+
+        .about-content{
+            grid-column:2 !important;
+            grid-row:2 !important;
+        }
+    }
+
+
+    @media only screen and (max-width: $mobile-res){
+
+        .about-images{
+            grid-column:1 !important;
+            grid-row:1 !important;
+        }
+
+        .about-content{
+            grid-column:1 !important;
+            grid-row:2 !important;
+        }
+    }
 </style>

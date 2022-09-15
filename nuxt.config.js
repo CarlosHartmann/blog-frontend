@@ -36,17 +36,9 @@ export default {
     ** Nuxt.js modules
     */
     modules: [
-        // Doc: https://axios.nuxtjs.org/usage
-        '@nuxtjs/axios',
         '@nuxtjs/style-resources',
         '@nuxt/http',
     ],
-    /*
-    ** Axios module configuration
-    */
-    axios: {
-        baseURL: 'http://carlos.local/wp-json/wp/v2/',
-    },
 
     env: {
         baseURL: 'http://carlos.local/wp-json/wp/v2/',

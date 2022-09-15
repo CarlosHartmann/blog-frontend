@@ -47,8 +47,8 @@
 <style lang="scss">
     .posts {
         grid-column: 1 / 4;
-        grid-row:1;
-        z-index:10;
+        grid-row: 1;
+        z-index: 10;
     }
 
     .posts > * {
@@ -58,5 +58,21 @@
 
     .posts > *:last-child {
         margin-bottom: 400px;
+    }
+
+    @media only screen and (max-width: $tablet-max-res){
+        .posts {
+            grid-column: 1/3;
+        }
+    }
+
+    @media only screen and (max-width: $mobile-res) {
+        .posts {
+            grid-column:1 !important;
+        }
+
+        .image {
+            display: none;
+        }
     }
 </style>

@@ -86,4 +86,30 @@
     .post-card-date-container{
         grid-column: 1;
     }
+
+    @media only screen and (max-width: $mobile-res) {
+        .post-card-date-container, .post-card-image-container{
+            display: none;
+        }
+
+        .grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .paper-bg {
+            grid-column:1 !important;
+            grid-row:1 !important;
+        }
+
+        .excerpt-post-card{
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: $tablet-max-res){
+        .post-card-image-container{
+            display: none;
+        }
+    } 
+
 </style>

@@ -23,7 +23,7 @@
                         <label>Message<textarea name="message" required ></textarea></label>
                     </p>
                     <p>
-                        <button class="button" value="Send Message" type="submit">Send</button>
+                        <button class="button" value="Send Message" type="submit"><h3>Send</h3></button>
                     </p>
 
                     </form>

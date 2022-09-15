@@ -1,5 +1,8 @@
 $unit: 10px;
 $bg-color: #1c1a18;
+$mobile-res: 600px;
+$tablet-min-res: 601px;
+$tablet-max-res: 820px;
 
 @font-face {
     font-family: "Sinistre";
@@ -25,11 +28,52 @@ html {
     height:100%;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    border-width: 1px;
+}
+
+@media only screen and (max-width: $mobile-res) {
+    html, h3, .text-body {
+        font-size: 20px !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .post-card-container {
+        grid-column: 1 !important;
+    }
+
+    .grid-item-c3{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: $tablet-min-res) and (max-width: $tablet-max-res){
+    .grid {
+        grid-template-columns: 14vw 1fr !important;
+        grid-auto-flow: row;
+    }
+
+    .grid-item-c3{
+        display: none;
+    }
+}
+
+
 body{
     height:100%;
 }
 
-h3{
+h3 {
     font-size: 12px;
     text-transform: uppercase;
 }
@@ -54,8 +98,6 @@ a:hover{
     box-sizing: border-box;
     margin: 0;
 }
-
-
 
 .grid {
     display: grid;
