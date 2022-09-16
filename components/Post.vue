@@ -25,18 +25,24 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .post-content{
         padding: $unit calc(2*$unit) calc(2*$unit) calc(2*$unit);
         grid-row: 2 !important;
         grid-column: 2;
+        animation-duration: 0.5s;
+        animation-name: fadeIn, slideFromBottom;
+        animation-timing-function: ease;
     }
 
     .post-images{
         grid-column: 3;
         grid-row: 2;
+        animation-duration: 0.5s;
+        animation-name: fadeIn, slideFromBottom;
+        animation-timing-function: ease;
 
-        :deep img {
+        img {
             width:100%;
             height:auto;
             padding-bottom: $unit;
@@ -48,7 +54,7 @@
         grid-column:1;
     }
 
-    .paper-bg{
+    .single-post .paper-bg{
         grid-row:2 !important;
     }
 
@@ -61,9 +67,9 @@
         grid-template-rows: auto 1fr;
     }
 
-    @media only screen and (max-width: $mobile-res) {
+    @media only screen and (max-width: $tablet-max-res){
         .paper-bg, .post-title, .post-images, .post-content {
-            grid-column: 1;
+            grid-column: 2 !important;
         }
 
         .post-content {
@@ -72,6 +78,12 @@
 
         .post-images {
             grid-row:3;
+        }
+    }
+
+    @media only screen and (max-width: $mobile-res) {
+        .paper-bg, .post-title, .post-images, .post-content {
+            grid-column: 1;
         }
     }
 </style>
