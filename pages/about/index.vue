@@ -47,9 +47,12 @@
 
     .about-content{
         grid-column:2;
+        opacity: 0;
+        animation: 0.5s ease 0.2s 1 fadeIn forwards;
     }
 
     .about-images{
+        animation: 0.5s ease 0s 1 fadeIn forwards;
         :deep img {
             width:100% !important;
             height: auto !important;

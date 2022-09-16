@@ -2,10 +2,10 @@
     <header class="header" :class="showMobileMenu ? 'open' : 'closed'">
         <div class="hamburger-background"></div>
         <ul>
-            <li @click="showMobileMenu = false"><nuxt-link to="/">Home</nuxt-link></li>
-            <li @click="showMobileMenu = false" ><nuxt-link to="/posts">Blog</nuxt-link></li>
-            <li @click="showMobileMenu = false" ><nuxt-link to="/about">About</nuxt-link></li>
-            <li @click="showMobileMenu = false" ><nuxt-link to="/contact">Contact</nuxt-link></li>
+            <li @click="showMobileMenu = false" style="animation-delay:0s;"><nuxt-link to="/">Home</nuxt-link></li>
+            <li @click="showMobileMenu = false" style="animation-delay:0.1s;"><nuxt-link to="/posts">Blog</nuxt-link></li>
+            <li @click="showMobileMenu = false" style="animation-delay:0.2s;"><nuxt-link to="/about">About</nuxt-link></li>
+            <li @click="showMobileMenu = false" style="animation-delay:0.3s;"><nuxt-link to="/contact">Contact</nuxt-link></li>
         </ul>
         <div class="hamburger-container" @click="showMobileMenu = !showMobileMenu">
             <div class="hamburger-line">
@@ -28,11 +28,6 @@
             return { pages }
         },
         fetchOnServer: true,
-        methods: {
-            showMobileMenu: function () {
-                this.$emit( 'showMobileMenu' );
-            }
-        }
     }
 </script>
 
@@ -63,6 +58,8 @@
             li {
                 padding: calc($unit / 2);
                 margin-right: $unit;
+                opacity: 0;
+                animation: 0.5s ease 0s 1 fadeIn forwards;
             }
 
             li:hover{

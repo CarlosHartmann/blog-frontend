@@ -122,16 +122,13 @@ a:hover{
     background-size: 100% auto;
     grid-row:1;
     color: black;
+    animation: 0.5s ease 0s 1 slideFromBottom;
 }
 
 .grid-item-c3 {
     grid-column: 3;
 }
 
-main{
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
 
 .text-body{
     color: black;
@@ -175,5 +172,23 @@ main{
 .no-images {
     p > img {
         display:none;
+    }
+}
+
+@keyframes slideFromBottom {
+    0% {
+      transform: translateY(40%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

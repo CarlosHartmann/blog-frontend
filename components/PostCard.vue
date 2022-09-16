@@ -1,10 +1,10 @@
 <template>
-    <nuxt-link :to="'/posts/' + slug" class="grid">
-        <div class="post-card-date-container">
+    <nuxt-link :to="'/' + slug" class="grid">
+        <div class="post-card-date-container" :style="{ animationDelay : `${nr/5 + 0.1}s` }">
             <p class="date-post-card" v-html="date"></p>
             <p class="time-post-card" v-html="time"></p>
         </div>
-        <div class="post-card-container">
+        <div class="post-card-container" :style="{ animationDelay : `${nr/5 + 0.1}s` }" :id="nr">
             <h3 class="id-post-card" v-html="nr"></h3>
             <h3 class="title-post-card" v-html="title"></h3>
             <p class="excerpt-post-card text-body" v-html="excerpt"></p>
@@ -35,7 +35,7 @@
 
         &:hover{
             img {
-                visibility: visible;
+                opacity: 1;
             }
 
             p, div {
@@ -53,13 +53,14 @@
         grid-template-columns: auto 1fr;
         grid-template-rows: auto 1fr;
         column-gap: $unit;
+        opacity: 0;
+        animation: 0.5s ease 0s 1 fadeIn forwards;
     }
 
     .post-card-image-container{
         grid-column:3;
         position: relative;
         display: flex;
-        overflow: visible;
     }
 
     .id-post-card{
@@ -78,13 +79,16 @@
     }
 
     .post-card-image{
-        visibility: hidden;
+        opacity: 0;
         position: absolute;
         width:100%;
+        transition: 0.3s;
     }
 
     .post-card-date-container{
+        opacity: 0;
         grid-column: 1;
+        animation: 0.5s ease 0s 1 fadeIn forwards;
     }
 
     @media only screen and (max-width: $mobile-res) {

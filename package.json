@@ -1,8 +1,8 @@
 {
-  "name": "nuxt",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "My impeccable Nuxt.js project",
-  "author": "Ivan Doric",
+  "description": "A Cinematic Blog by Carlos",
+  "author": "Carlos Hartmann",
   "private": true,
   "scripts": {
     "dev": "nuxt",

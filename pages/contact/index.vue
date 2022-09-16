@@ -3,30 +3,32 @@
         <template v-for="(page, index) in pages">
             <div class="grid main-grid" v-if="page.title.rendered == 'Contact'">
                 <back-button class="back-button"></back-button>
-                <form 
-                    name="contact"
-                    method="POST"
-                    netlify
-                    onSubmit="submit"
-                    data-netlify-honeypot="bot-field"
-                    action="/thankyou/">
+                <div class="contact-content">
+                    <form 
+                        name="contact"
+                        method="POST"
+                        netlify
+                        onSubmit="submit"
+                        data-netlify-honeypot="bot-field"
+                        action="/thankyou/">
 
-                    <input type="hidden" name="form-name" value="contact">
+                        <input type="hidden" name="form-name" value="contact">
 
-                    <p>
-                        <label>Name<input type="text" name="name" required /></label>
-                    </p>
-                    <p>
-                        <label>Email<input type="email" name="email" required /></label>
-                    </p>
-                    <p>
-                        <label>Message<textarea name="message" required ></textarea></label>
-                    </p>
-                    <p>
-                        <button class="button" value="Send Message" type="submit"><h3>Send</h3></button>
-                    </p>
+                        <p>
+                            <label>Name<input type="text" name="name" required /></label>
+                        </p>
+                        <p>
+                            <label>Email<input type="email" name="email" required /></label>
+                        </p>
+                        <p>
+                            <label>Message<textarea name="message" required ></textarea></label>
+                        </p>
+                        <p>
+                            <button class="button" value="Send Message" type="submit"><h3>Send</h3></button>
+                        </p>
 
                     </form>
+                </div>
             </div>
         </template>
     </div>
@@ -64,8 +66,9 @@
 
 <style scoped lang="scss">
     .contact-content{
-        grid-column: 3;
+        grid-column: 2;
         grid-row:1;
+        animation: 0.5s ease 0s 1 fadeIn forwards;
     }
 
     .back-button{

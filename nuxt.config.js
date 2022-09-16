@@ -60,5 +60,11 @@ export default {
         extractCSS: true,
         extend(config, ctx) {
         }
-    }
+    },
+
+    router: {
+        scrollBehavior: function (to, from, savedPosition) {
+            return { x: 0, y: 0 }
+        }
+    },
 }

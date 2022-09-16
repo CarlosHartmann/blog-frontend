@@ -18,6 +18,7 @@
     import PostCard from '@/components/PostCard'
 
     export default {
+        // scrollToTop: true,
         data() {
             return {
                 posts: [],
@@ -49,6 +50,7 @@
         grid-column: 1 / 4;
         grid-row: 1;
         z-index: 10;
+        animation: 0.5s ease 0s 1 slideFromBottom;
     }
 
     .posts > * {

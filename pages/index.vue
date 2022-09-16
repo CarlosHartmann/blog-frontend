@@ -33,15 +33,20 @@
 <style lang="scss">
     .banner-img {
         object-fit: cover;
+        animation: 0.5s ease 0s 1 fadeIn forwards;
     }
 
-    .landing-page {
-        .header {
-            width:100%;
-            height:100%;
-            justify-content: center;
-            align-items: center;
-            display:flex;
+    @media only screen and (min-width: $tablet-max-res){
+
+        .landing-page {
+            .header {
+                width:100%;
+                height:100%;
+                justify-content: center;
+                align-items: center;
+                display:flex;
+            }
+
         }
     }
 </style>
