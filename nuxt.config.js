@@ -69,6 +69,6 @@ export default {
     },
 
     http: {
-        baseURL: "http://carlos.local/wp-json/",
+        baseURL: "http://admin.smog.sh/wp-json/",
     },
 }
