@@ -83,7 +83,7 @@
 
     @media only screen and (max-width: $mobile-res) {
         .paper-bg, .post-title, .post-images, .post-content {
-            grid-column: 1;
+            grid-column: 1 !important;
         }
     }
 </style>

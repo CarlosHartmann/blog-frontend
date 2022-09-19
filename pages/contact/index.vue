@@ -113,4 +113,10 @@
             color: white;
         }
     }
+
+    @media only screen and (max-width: $mobile-res) {
+        .contact-content{
+            grid-column: 1;
+        }
+    }
 </style>

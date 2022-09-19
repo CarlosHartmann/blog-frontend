@@ -15,6 +15,12 @@
         grid-column: 2;
         grid-row:1;
     }
+
+    @media only screen and (max-width: $mobile-res) {
+        .thank-you{
+            grid-column: 1;
+        }
+    }
 </style>
 
 <script>
