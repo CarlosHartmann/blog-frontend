@@ -57,7 +57,7 @@
         },
         async asyncData({ params, $http }) {
             console.log("async");
-            const pages = await $http.$get(`/wp/v2/pages?_embed/`);
+            const pages = await $http.$get(`wp/v2/pages?_embed/`);
             return { pages }
         },
         fetchOnServer: true,

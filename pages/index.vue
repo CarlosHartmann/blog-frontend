@@ -20,10 +20,10 @@
         layout: 'LandingPage',
         async asyncData({ params, $http }) {
             $http.setToken('IndbneOnZkoVSKGPbQKS6tFYJiuIyCfDlqlqVukM', 'Bearer')
-            const imgs = await $http.$get(`/filebird/public/v1/attachment-id/?folder_id=1`);
+            const imgs = await $http.$get(`filebird/public/v1/attachment-id/?folder_id=1`);
             const n = getRandomInt(imgs.data.attachment_ids.length - 1);
             const id = await imgs.data.attachment_ids[n];
-            const img = await $http.$get(`/wp/v2/media/${id}`);
+            const img = await $http.$get(`wp/v2/media/${id}`);
             return { img, imgs, id }
         },
         fetchOnServer: true,

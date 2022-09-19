@@ -41,7 +41,7 @@ export default {
     ],
 
     env: {
-        baseURL: 'http://carlos.local/wp-json/wp/v2/',
+        baseURL: 'http://admin.smog.sh/wp-json/',
     },
 
     styleResources: {
