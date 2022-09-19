@@ -41,7 +41,7 @@ export default {
     ],
 
     env: {
-        baseURL: 'http://admin.smog.sh/wp-json/',
+        baseURL: 'http://admin.smog.sh/?rest_route=/',
     },
 
     styleResources: {
@@ -69,6 +69,6 @@ export default {
     },
 
     http: {
-        baseURL: "http://admin.smog.sh/wp-json/",
+        baseURL: "http://admin.smog.sh/?rest_route=/",
     },
 }
