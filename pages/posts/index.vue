@@ -25,7 +25,7 @@
             }
         },
         async asyncData({ params, $http }) {
-            const posts = await $http.$get(`http://carlos.local/wp-json/wp/v2/posts?_embed`);
+            const posts = await $http.$get(`/wp/v2/posts?_embed`);
             return { posts }
         },
         fetchOnServer: true,
