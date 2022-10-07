@@ -141,10 +141,19 @@ a:hover{
     font-size: 16px;
     font-family: serif;
     line-height: 140%;
+
+    a {
+        color: black;
+        text-decoration: underline;
+
+        &:hover{
+            color: rgb(71, 71, 71);
+        }
+    }
 }
 
-.drop-cap {
-    :first-child:first-letter {
+// .drop-cap {
+    .drop-cap p:first-of-type:first-letter {
         float: left;
         font-family: Sinistre;
         font-size: 120px;
@@ -152,7 +161,7 @@ a:hover{
         padding-right: 4px;
         padding-bottom: 4px;
     }
-}
+// }
 
 .button{
     text-transform: uppercase;
