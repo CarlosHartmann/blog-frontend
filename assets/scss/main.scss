@@ -152,8 +152,8 @@ a:hover{
     }
 }
 
-// .drop-cap {
-    .drop-cap p:first-of-type:first-letter {
+.drop-cap {
+    > div:first-child:first-letter {
         float: left;
         font-family: Sinistre;
         font-size: 120px;
@@ -161,7 +161,7 @@ a:hover{
         padding-right: 4px;
         padding-bottom: 4px;
     }
-// }
+}
 
 .button{
     text-transform: uppercase;

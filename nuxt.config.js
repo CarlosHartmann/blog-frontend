@@ -41,7 +41,7 @@ export default {
     ],
 
     env: {
-        baseURL: 'http://admin.smog.sh/wp-json/',
+        baseURL: "http://carlos.local/wp-json/" || "http://admin.smog.sh/wp-json/",
     },
 
     styleResources: {
@@ -50,13 +50,7 @@ export default {
         ]
     },
 
-    /*
-    ** Build configuration
-    */
     build: {
-        /*
-        ** You can extend webpack config here
-        */
         extractCSS: true,
         extend(config, ctx) {
         }
@@ -69,6 +63,6 @@ export default {
     },
 
     http: {
-        baseURL: "http://admin.smog.sh/wp-json/",
+        baseURL: "http://carlos.local/wp-json/" || "http://admin.smog.sh/wp-json/",
     },
 }

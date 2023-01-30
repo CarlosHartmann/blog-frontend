@@ -18,7 +18,6 @@
     import PostCard from '@/components/PostCard'
 
     export default {
-        // scrollToTop: true,
         data() {
             return {
                 posts: [],
