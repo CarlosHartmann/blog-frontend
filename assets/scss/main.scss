@@ -3,6 +3,7 @@ $bg-color: #1c1a18;
 $mobile-res: 600px;
 $tablet-min-res: 601px;
 $tablet-max-res: 820px;
+$main-font-size: 12px;
 
 @font-face {
     font-family: "Sinistre";
@@ -16,7 +17,7 @@ $tablet-max-res: 820px;
 
 html {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: $main-font-size;
     word-spacing: 1px;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -182,10 +183,18 @@ a:hover{
     p {
         font-size: 0;
     }
+    .wp-caption p {
+        font-size: 16px;
+        font-family: serif;
+        font-style: italic;
+    }
 }
 
 .no-images {
-    p > img {
+    .wp-caption {
+        display:none;
+    }
+    img {
         display:none;
     }
 }
