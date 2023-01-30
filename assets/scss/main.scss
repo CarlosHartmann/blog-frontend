@@ -161,6 +161,14 @@ a:hover{
         padding-right: 4px;
         padding-bottom: 4px;
     }
+    > p:first-child:first-letter {
+        float: left;
+        font-family: Sinistre;
+        font-size: 120px;
+        line-height: 90px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+    }
 }
 
 .button{
