@@ -30,10 +30,12 @@
 </script>
 
 <style lang="scss">
-    a {
+    .post a {
         grid-column: 1 /4;
+        text-decoration: none;
 
         &:hover{
+            color: white;
             img {
                 opacity: 1;
             }

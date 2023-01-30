@@ -39,6 +39,10 @@
         height:auto;
         z-index: 20;
         padding: 0 $unit 0 $unit;
+
+        a {
+            text-decoration: none;
+        }
         
         ul {
             @extend h3;

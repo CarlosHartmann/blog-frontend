@@ -106,6 +106,8 @@
         border-width:1px;
         background-color: white;
         color: black;
+        font-style: normal;
+        font-family: Roboto;
 
         &:hover{
             background-color: $bg-color;
