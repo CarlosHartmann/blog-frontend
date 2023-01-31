@@ -40,7 +40,7 @@
     export default {
         head() {
             return {
-                title: 'Contact page',
+                title: 'Contact',
                 meta: [
                     {hid: 'description', name: 'description', content: 'My description'},
                     {hid: 'ogtitle', property: 'og:title', content: 'Contact page'}

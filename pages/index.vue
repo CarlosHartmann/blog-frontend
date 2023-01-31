@@ -27,6 +27,9 @@
             return { img, imgs, id }
         },
         fetchOnServer: true,
+        head: {
+            title: 'Carlos Ha',
+        },
     }
 </script>
 
@@ -46,7 +49,6 @@
                 align-items: center;
                 display:flex;
             }
-
         }
     }
 </style>

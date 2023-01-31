@@ -40,7 +40,10 @@
                     'time' : myArray[1]
                 }
             }
-        }
+        },
+        head: {
+            title: 'Blog',
+        },
     }
 </script>
 
