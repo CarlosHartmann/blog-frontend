@@ -15,7 +15,7 @@
         scrollToTop: true,
         head() {
             return {
-                title: 'Post page',
+                title: 'Post',
                 meta: [
                     {hid: 'description', name: 'description', content: 'My description'},
                     {hid: 'ogtitle', property: 'og:title', content: 'Contact page'}
