@@ -152,23 +152,13 @@ a:hover{
     }
 }
 
-.drop-cap {
-    > div:first-child:first-letter {
-        float: left;
-        font-family: Sinistre;
-        font-size: 120px;
-        line-height: 90px;
-        padding-right: 4px;
-        padding-bottom: 4px;
-    }
-    > p:first-child:first-letter {
-        float: left;
-        font-family: Sinistre;
-        font-size: 120px;
-        line-height: 90px;
-        padding-right: 4px;
-        padding-bottom: 4px;
-    }
+.initiale:first-letter {
+    float: left;
+    font-family: Sinistre;
+    font-size: 120px;
+    line-height: 90px;
+    padding-right: 4px;
+    padding-bottom: 4px;
 }
 
 .button{
@@ -186,22 +176,24 @@ a:hover{
 }
 
 
-.no-text{
-    p {
-        font-size: 0;
+.no-text {
+    p, div, div::first-letter {
+        font-size: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
     }
     .wp-caption p {
-        font-size: 16px;
-        font-family: serif;
-        font-style: italic;
+        padding-top: 6px;
+        font-size: $main-font-size;
+        font-family: Roboto;
+    }
+    iframe {
+        display: none;
     }
 }
 
 .no-images {
-    .wp-caption {
-        display:none;
-    }
-    img {
+    .wp-caption, img {
         display:none;
     }
 }
