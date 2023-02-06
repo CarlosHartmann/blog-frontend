@@ -42,13 +42,8 @@
         animation-name: fadeIn, slideFromBottom;
         animation-timing-function: ease;
 
-        > div {
-            padding-top: $unit;
-        }
-
-        div {
-            width:100% !important;
-            height:auto !important;
+        p > img {
+            padding-bottom: $unit;
         }
 
         img {
@@ -56,8 +51,9 @@
             height:auto;
         }
 
-        > div:first-of-type {
-            padding-top: 0px;
+        div {
+            width:100% !important;
+            height:auto !important;
         }
     }
 
