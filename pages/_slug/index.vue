@@ -28,7 +28,7 @@
             }
         },
         async asyncData({ params, $http }) {
-            const posts = await $http.$get(`wp/v2/posts?_embed`);
+            const posts = await $http.$get(`wp/v2/posts?_embed&per_page=100`);
             return { posts }
         },
         fetchOnServer: true,
