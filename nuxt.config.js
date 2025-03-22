@@ -3,7 +3,10 @@ import pkg from './package'
 export default {
     target: 'static',
     generate: {
-      fallback: true
+      fallback: true,
+      routes: async () => {
+        const res = await axios.get('https://admin.smog.sh/wp-json/wp/v2/posts?per_page=100')
+        return res.data.map(post => `/posts/${post.slug}`)
     },
     ssr: true,
     head: {
