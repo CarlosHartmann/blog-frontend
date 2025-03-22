@@ -2,6 +2,9 @@ import pkg from './package'
 
 export default {
     target: 'static',
+    generate: {
+      fallback: true
+    },
     ssr: true,
     head: {
         title: pkg.name,
