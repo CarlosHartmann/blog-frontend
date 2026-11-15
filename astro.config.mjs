@@ -6,4 +6,6 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [sitemap()],
+  // Banner stills are fetched from WordPress and re-encoded at build time.
+  image: { domains: ['admin.smog.sh'] },
 });

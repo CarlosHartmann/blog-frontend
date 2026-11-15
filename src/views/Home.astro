@@ -1,12 +1,24 @@
 ---
 // Landing page: one film still, full screen, with the navigation on top.
 // The still changes every day; the list comes from the banner media folder.
+import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import { getBanners } from '../lib/wp.js';
 
 const { lang } = Astro.props;
-const banners = await getBanners();
+
+// The stills in the media library are often multi-megabyte PNGs. Re-encode
+// them once per build (never upscaling) so the home page stays light.
+const MAX_WIDTH = 1920;
+const banners = await Promise.all(
+  (await getBanners()).map(async (banner) => {
+    const width = Math.min(banner.width, MAX_WIDTH);
+    const height = Math.round((banner.height * width) / banner.width);
+    const image = await getImage({ src: banner.src, width, height, format: 'webp', quality: 72 });
+    return { src: image.src, alt: banner.alt };
+  }),
+);
 const today = banners[Math.floor(Date.now() / 86400000) % banners.length];
 ---
 

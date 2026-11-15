@@ -85,7 +85,9 @@ export function getPage(slug) {
 // Home-page banners: every image in the "banner" media folder (FileBird
 // folder 1). The FileBird key is a secret and is read from the FILEBIRD_TOKEN
 // build variable; without it the site shows the one fallback image.
-const FALLBACK_BANNERS = [{ src: 'https://admin.smog.sh/wp-content/uploads/2023/03/vlcsnap-00238.jpg', alt: '' }];
+const FALLBACK_BANNERS = [
+  { src: 'https://admin.smog.sh/wp-content/uploads/2023/03/vlcsnap-00238.jpg', alt: '', width: 704, height: 512 },
+];
 
 async function loadBanners() {
   const token = process.env.FILEBIRD_TOKEN;
@@ -100,10 +102,16 @@ async function loadBanners() {
     });
     const ids = folder.data.data.attachment_ids;
     if (!ids.length) return FALLBACK_BANNERS;
-    const media = await request(`wp/v2/media?include=${ids.join(',')}&per_page=100&_fields=id,source_url,alt_text`);
+    const media = await request(`wp/v2/media?include=${ids.join(',')}&per_page=100&_fields=id,source_url,alt_text,media_details`);
     const banners = media.data
+      .filter((m) => m.media_details && m.media_details.width && m.media_details.height)
       .sort((a, b) => a.id - b.id)
-      .map((m) => ({ src: m.source_url, alt: m.alt_text || '' }));
+      .map((m) => ({
+        src: m.source_url,
+        alt: m.alt_text || '',
+        width: m.media_details.width,
+        height: m.media_details.height,
+      }));
     return banners.length ? banners : FALLBACK_BANNERS;
   } catch (err) {
     console.warn(`[banner] Folder could not be read (${err.message}): using the fallback banner.`);
