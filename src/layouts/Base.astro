@@ -1,0 +1,67 @@
+---
+import '@fontsource/eb-garamond/400.css';
+import '@fontsource/eb-garamond/400-italic.css';
+import '@fontsource/eb-garamond/500.css';
+import '@fontsource/eb-garamond/500-italic.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ui, href, SITE, SITE_NAME } from '../lib/i18n.js';
+
+const {
+  lang = 'de',
+  // German path of this page ('/posts/'); the English one is derived from it.
+  path = '/',
+  title = '',
+  description = '',
+  image = null,
+  article = false,
+  published = '',
+  // Posts exist once, in German: their English-framed copies point back to it.
+  canonicalLang = lang,
+  current = '',
+  bare = false,
+} = Astro.props;
+
+const t = ui[lang];
+const fullTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
+const desc = description || t.description;
+const canonical = SITE + href(canonicalLang, path);
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <meta name="theme-color" content="#1c1a18" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="de" href={SITE + href('de', path)} />
+    <link rel="alternate" hreflang="en" href={SITE + href('en', path)} />
+    <link rel="alternate" hreflang="x-default" href={SITE + href('de', path)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={title || SITE_NAME} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_CH' : 'en_GB'} />
+    {published && <meta property="article:published_time" content={published} />}
+    {image && <meta property="og:image" content={image.src} />}
+    {image && image.width && <meta property="og:image:width" content={String(image.width)} />}
+    {image && image.height && <meta property="og:image:height" content={String(image.height)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">{t.skip}</a>
+    {!bare && <Header lang={lang} path={path} current={current} />}
+    <slot />
+    {!bare && <Footer lang={lang} />}
+  </body>
+</html>

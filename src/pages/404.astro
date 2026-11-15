@@ -1,0 +1,58 @@
+---
+// Netlify serves this page for every unknown address. Before giving up it
+// asks WordPress whether a post with that address exists: a post published
+// a minute ago may simply not have been built yet.
+import Base from '../layouts/Base.astro';
+import { ui } from '../lib/i18n.js';
+import { API } from '../lib/wp.js';
+
+const de = ui.de;
+const en = ui.en;
+---
+
+<Base lang="de" path="/" title="404">
+  <meta slot="head" name="robots" content="noindex" />
+  <main id="inhalt" class="page">
+    <div class="lost" id="lost">
+      <p class="code">ERR_FOLIO_NOT_FOUND</p>
+      <h1 id="lost-title">{de.notFoundLoading}</h1>
+      <p id="lost-text" hidden>
+        {de.notFoundText}<br /><span lang="en">{en.notFoundText}</span>
+      </p>
+      <a class="button" id="lost-link" href="/posts/" hidden>{de.toBlog}</a>
+    </div>
+    <div class="leaf-grid" id="found" hidden>
+      <aside class="side"><a class="back" href="/posts/">← {de.back}</a></aside>
+      <article class="paper" lang="de">
+        <h1 class="title" id="found-title"></h1>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="prose" id="found-body"></div>
+      </article>
+    </div>
+  </main>
+  <script is:inline define:vars={{ API, title: de.notFoundTitle }}>
+    (async () => {
+      const giveUp = () => {
+        document.getElementById('lost-title').textContent = title;
+        document.getElementById('lost-text').hidden = false;
+        document.getElementById('lost-link').hidden = false;
+      };
+      const parts = location.pathname.split('/').filter(Boolean);
+      const slug = parts[0] === 'en' ? parts[1] : parts[0];
+      if (!slug || parts.length > (parts[0] === 'en' ? 2 : 1) || !/^[a-z0-9-]+$/i.test(slug)) return giveUp();
+      try {
+        const res = await fetch(`${API}wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=title,content`);
+        const posts = res.ok ? await res.json() : [];
+        if (!posts.length) return giveUp();
+        // Content comes from the site's own WordPress, the same source as every built page.
+        document.getElementById('found-title').innerHTML = posts[0].title.rendered;
+        document.getElementById('found-body').innerHTML = posts[0].content.rendered;
+        document.title = document.getElementById('found-title').textContent + ' · Carlos Ha';
+        document.getElementById('lost').hidden = true;
+        document.getElementById('found').hidden = false;
+      } catch (err) {
+        giveUp();
+      }
+    })();
+  </script>
+</Base>

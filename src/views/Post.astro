@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, href, formatDate } from '../lib/i18n.js';
+import { getPosts } from '../lib/wp.js';
+
+const { lang, post } = Astro.props;
+const t = ui[lang];
+const posts = await getPosts();
+const index = posts.findIndex((p) => p.slug === post.slug);
+const newer = posts[index - 1];
+const older = posts[index + 1];
+---
+
+<Base
+  lang={lang}
+  path={`/${post.slug}/`}
+  title={post.titleText}
+  description={post.excerpt}
+  image={post.image}
+  published={`${post.dateGmt}Z`}
+  article
+  canonicalLang="de"
+  current="blog"
+>
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side" aria-label={t.postMeta}>
+        <a class="back" href={href(lang, '/posts/')}>← {t.back}</a>
+        <dl>
+          <div>
+            <dt>{t.shelfmark}</dt>
+            <dd>MS smog.sh · Nr. {post.nr}</dd>
+          </div>
+          <div>
+            <dt>{t.date}</dt>
+            <dd><time datetime={post.date}>{formatDate(post.date, lang)}</time></dd>
+          </div>
+          <div>
+            <dt>{t.length}</dt>
+            <dd>{t.readingTime(post.minutes)}</dd>
+          </div>
+        </dl>
+        {t.germanOnly && <p class="note" style="margin: 0">{t.germanOnly}</p>}
+      </aside>
+
+      <article class="paper" lang="de">
+        <h1 class="title" set:html={post.title} />
+        <div class="rule" aria-hidden="true"></div>
+        <div class="prose">
+          {
+            (post.toc.length > 0 || post.lead) && (
+              <div class="gloss lead">
+                {post.toc.length > 0 && (
+                  <nav class="gloss toc" aria-label={t.contents}>
+                    <span class="label" lang={lang}>{t.contents}</span>
+                    <ol>
+                      {post.toc.map((entry) => (
+                        <li>
+                          <a href={`#${entry.id}`}>
+                            <span class="num">{entry.num}</span>
+                            <span>{entry.text}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                )}
+                <Fragment set:html={post.lead} />
+              </div>
+            )
+          }
+          <Fragment set:html={post.html} />
+        </div>
+        <nav class="post-nav" aria-label={t.blogTitle}>
+          {
+            older ? (
+              <a href={href(lang, `/${older.slug}/`)} rel="prev">
+                <span class="mono" lang={lang}>← {t.older}</span>
+                <span set:html={older.title} />
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            newer && (
+              <a href={href(lang, `/${newer.slug}/`)} rel="next">
+                <span class="mono" lang={lang}>{t.newer} →</span>
+                <span set:html={newer.title} />
+              </a>
+            )
+          }
+        </nav>
+      </article>
+    </div>
+  </main>
+</Base>

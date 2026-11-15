@@ -1,0 +1,16 @@
+---
+import { ui } from '../lib/i18n.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const built = new Intl.DateTimeFormat(t.locale, {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+  timeZone: 'Europe/Zurich',
+}).format(new Date());
+---
+
+<footer class="site-footer">
+  <span><span class="led" aria-hidden="true"></span>smog.sh · {t.built}: {built}</span>
+  <span>Carlos Ha · Zürich · <a href="/rss.xml">{t.feed}</a></span>
+</footer>

@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+import { sections, pick } from '../data/publications.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<Base lang={lang} path="/publications/" title={t.pubsTitle} description={t.pubsIntro} current="publications">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <nav aria-label={t.pubsSections}>
+          {sections.map((section) => <a href={`#${section.id}`}>{pick(section.title, lang)}</a>)}
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{t.pubsKicker}</p>
+        <h1 class="title">{t.pubsTitle}</h1>
+        <p class="lede">{t.pubsIntro}</p>
+        <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
+        <div class="entries">
+          {
+            sections.map((section) => {
+              const title = pick(section.title, lang);
+              return (
+                <>
+                  <h2 id={section.id} aria-label={title}>
+                    <span class="initial" aria-hidden="true">{title[0]}</span>
+                    <span aria-hidden="true">{title.slice(1)}</span>
+                  </h2>
+                  <ul>
+                    {section.items.map((item) => {
+                      const link = item.post ? href(lang, `/${item.post}/`) : item.url;
+                      return (
+                        <li>
+                          <span class="year">{pick(item.year, lang)}</span>
+                          <span class="what">{link ? <a href={link}>{pick(item.title, lang)}</a> : pick(item.title, lang)}</span>
+                          <span class="detail">{pick(item.detail, lang)}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </>
+              );
+            })
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Base>

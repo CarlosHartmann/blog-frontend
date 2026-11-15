@@ -1,0 +1,31 @@
+---
+// Landing page: one film still, full screen, with the navigation on top.
+// The still changes every day; the list comes from the banner media folder.
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import { getBanners } from '../lib/wp.js';
+
+const { lang } = Astro.props;
+const banners = await getBanners();
+const today = banners[Math.floor(Date.now() / 86400000) % banners.length];
+---
+
+<Base lang={lang} path="/" current="home" bare>
+  <link slot="head" rel="preload" as="image" href={today.src} />
+  <main id="inhalt" class="home">
+    <img class="banner" id="banner" src={today.src} alt={today.alt} fetchpriority="high" />
+    <div class="home-box">
+      <h1 class="wordmark" style="margin: 0; font-weight: 400">smog.sh</h1>
+      <Nav lang={lang} path="/" current="home" />
+    </div>
+  </main>
+  <script is:inline define:vars={{ banners }}>
+    // The page is built once but visited on many days: pick today's still here.
+    const pick = banners[Math.floor(Date.now() / 86400000) % banners.length];
+    const img = document.getElementById('banner');
+    if (img && pick && img.getAttribute('src') !== pick.src) {
+      img.src = pick.src;
+      img.alt = pick.alt;
+    }
+  </script>
+</Base>

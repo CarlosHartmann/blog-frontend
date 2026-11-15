@@ -1,0 +1,13 @@
+---
+import Post from '../../views/Post.astro';
+import { getPosts } from '../../lib/wp.js';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+---
+
+<Post lang="en" post={post} />

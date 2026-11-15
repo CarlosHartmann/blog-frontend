@@ -1,0 +1,31 @@
+---
+// The form is handled by Netlify Forms (form name "contact"), which finds it
+// in the built HTML. The hidden "bot-field" is its spam honeypot.
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<Base lang={lang} path="/contact/" title={t.contactTitle} current="contact">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side"></aside>
+      <section class="paper">
+        <p class="kicker mono">{t.contactKicker}</p>
+        <h1 class="title">{t.contactTitle}</h1>
+        <p class="lede">{t.contactIntro}</p>
+        <div class="rule" aria-hidden="true"></div>
+        <form class="form" name="contact" method="POST" action={href(lang, '/thankyou/')} data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden"><label>Bitte leer lassen <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+          <label class="mono">{t.form.name}<input type="text" name="name" autocomplete="name" required /></label>
+          <label class="mono">{t.form.email}<input type="email" name="email" autocomplete="email" required /></label>
+          <label class="mono">{t.form.message}<textarea name="message" required></textarea></label>
+          <button class="button" type="submit">{t.form.send}</button>
+        </form>
+      </section>
+    </div>
+  </main>
+</Base>

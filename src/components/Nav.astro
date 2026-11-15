@@ -1,0 +1,26 @@
+---
+// Main navigation plus the language switch. `path` is the German path of the
+// current page, so the switch can point at the same page in the other language.
+import { ui, href } from '../lib/i18n.js';
+
+const { lang, path = '/', current = '' } = Astro.props;
+const t = ui[lang];
+const items = [
+  ['home', '/'],
+  ['blog', '/posts/'],
+  ['publications', '/publications/'],
+  ['about', '/about/'],
+  ['contact', '/contact/'],
+];
+---
+
+<nav class="site-nav mono" aria-label={t.navLabel}>
+  {
+    items.map(([key, target]) => (
+      <a href={href(lang, target)} aria-current={current === key ? 'page' : undefined}>
+        {t.nav[key]}
+      </a>
+    ))
+  }
+  <a class="lang" href={href(t.other, path)} hreflang={t.other} lang={t.other} aria-label={t.switchTo}>{t.switchShort}</a>
+</nav>

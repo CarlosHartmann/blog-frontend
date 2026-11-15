@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../lib/i18n.js';
+import { getPage } from '../lib/wp.js';
+import { aboutEn } from '../data/about.en.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+
+// German: the WordPress page "About" (slug `aik`).
+// English: a WordPress page with the slug `about-en` if there is one,
+// otherwise the translation in src/data/about.en.js with the same portrait.
+const german = await getPage('aik');
+let html = german ? german.html : '';
+let lead = german ? german.lead : '';
+if (lang === 'en') {
+  const english = await getPage('about-en');
+  html = english ? english.html : aboutEn;
+  lead = english && english.lead ? english.lead : lead;
+}
+---
+
+<Base lang={lang} path="/about/" title={t.aboutTitle} current="about">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side"></aside>
+      <article class="paper">
+        <p class="kicker mono">{t.aboutKicker}</p>
+        <h1 class="title">{t.aboutTitle}</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="prose">
+          {lead && <div class="gloss lead" set:html={lead} />}
+          <Fragment set:html={html} />
+        </div>
+      </article>
+    </div>
+  </main>
+</Base>

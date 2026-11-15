@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, href, formatDate } from '../lib/i18n.js';
+import { getPosts } from '../lib/wp.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const posts = await getPosts();
+const first = posts.find((p) => p.image);
+---
+
+<Base lang={lang} path="/posts/" title={t.blogTitle} current="blog">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <dl>
+          <div>
+            <dt>{t.blogKicker}</dt>
+            <dd>Nr. 0–{posts.length - 1}</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{t.blogKicker}</p>
+        <h1 class="title">{t.blogTitle}</h1>
+        <p class="lede">{t.blogIntro}</p>
+        <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
+        <ol class="register" start="0" lang="de">
+          {
+            posts.map((post) => (
+              <li>
+                <a href={href(lang, `/${post.slug}/`)} data-img={post.image ? post.image.preview : ''} data-title={post.titleText}>
+                  <span class="nr" aria-hidden="true">{post.nr}</span>
+                  <time class="mono when" datetime={post.date} lang={lang}>{formatDate(post.date, lang)}</time>
+                  <h2 set:html={post.title} />
+                  <p>{post.excerpt}</p>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      {
+        first && (
+          <figure class="preview" aria-hidden="true">
+            <img id="preview-img" src={first.image.preview} alt="" />
+            <figcaption id="preview-cap">{first.titleText}</figcaption>
+          </figure>
+        )
+      }
+    </div>
+  </main>
+  <script is:inline>
+    // The margin shows the image of the entry under the pointer or focus.
+    (() => {
+      const img = document.getElementById('preview-img');
+      const cap = document.getElementById('preview-cap');
+      if (!img) return;
+      const show = (event) => {
+        const link = event.target.closest('a[data-img]');
+        if (!link || !link.dataset.img || img.getAttribute('src') === link.dataset.img) return;
+        img.src = link.dataset.img;
+        cap.textContent = link.dataset.title;
+      };
+      const list = document.querySelector('.register');
+      list.addEventListener('mouseover', show);
+      list.addEventListener('focusin', show);
+    })();
+  </script>
+</Base>

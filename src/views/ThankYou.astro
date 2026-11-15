@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<Base lang={lang} path="/thankyou/" title={t.thanksTitle} current="contact">
+  <meta slot="head" name="robots" content="noindex" />
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side"></aside>
+      <section class="paper">
+        <p class="kicker mono">{t.contactKicker}</p>
+        <h1 class="title">{t.thanksTitle}</h1>
+        <p class="lede">{t.thanksText}</p>
+        <div class="rule" aria-hidden="true"></div>
+        <a class="button" href={href(lang, '/posts/')}>{t.toBlog}</a>
+      </section>
+    </div>
+  </main>
+</Base>
