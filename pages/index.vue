@@ -1,34 +1,40 @@
 <template>
     <section class="container">
-        <img class="container banner-img" :src="img.source_url">
+        <img class="container banner-img" :src="banner.src" :alt="banner.alt">
     </section>
 </template>
 
 <script>
-    let getRandomInt = (max) => {
-        return Math.floor(Math.random() * max);
-    }
+    // The same image all day, the next one tomorrow.
+    const dayNumber = () => Math.floor(Date.now() / 86400000)
+
+    const FALLBACK = [
+        { src: 'https://admin.smog.sh/wp-content/uploads/2023/03/vlcsnap-00238.jpg', alt: '' }
+    ]
 
     export default {
+        layout: 'LandingPage',
         data() {
             return {
-                img: '',
-                id: '',
-                imgs: []
+                day: 0
             }
         },
-        layout: 'LandingPage',
-        async asyncData({ params, $http }) {
-            $http.setToken('IndbneOnZkoVSKGPbQKS6tFYJiuIyCfDlqlqVukM', 'Bearer')
-            const imgs = await $http.$get(`filebird/public/v1/attachment-id/?folder_id=1`);
-            const n = getRandomInt(imgs.data.attachment_ids.length - 1);
-            const id = await imgs.data.attachment_ids[n];
-            const img = await $http.$get(`wp/v2/media/${id}`);
-            return { img, imgs, id }
+        // The banner list is collected at build time (see nuxt.config.js) so
+        // that the media-folder key never reaches the browser.
+        asyncData({ payload }) {
+            return { banners: payload && payload.banners && payload.banners.length ? payload.banners : FALLBACK }
         },
-        fetchOnServer: true,
+        computed: {
+            banner() {
+                return this.banners[this.day % this.banners.length]
+            }
+        },
+        mounted() {
+            this.day = dayNumber()
+        },
         head: {
             title: 'Carlos Ha',
+            link: [{ hid: 'canonical', rel: 'canonical', href: 'https://www.smog.sh/' }]
         },
     }
 </script>

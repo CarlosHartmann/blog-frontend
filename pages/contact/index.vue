@@ -42,8 +42,7 @@
             return {
                 title: 'Contact',
                 meta: [
-                    {hid: 'description', name: 'description', content: 'My description'},
-                    {hid: 'ogtitle', property: 'og:title', content: 'Contact page'}
+                    {hid: 'og:title', property: 'og:title', content: 'Contact · Carlos Ha'}
                 ]
             }
         },
@@ -56,7 +55,6 @@
             }
         },
         async asyncData({ params, $http }) {
-            console.log("async");
             const pages = await $http.$get(`wp/v2/pages?_embed/`);
             return { pages }
         },

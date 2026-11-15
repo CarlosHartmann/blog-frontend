@@ -3,7 +3,7 @@
         <div class="posts">
             <div class="post" v-for="(post, index) in posts" :key="post.id">
                 <div class="grid">
-                    <post-card :title="post.title.rendered" :excerpt="post.excerpt.rendered" :id="post.id" :nr="index" :date="formatDate(post.date).date" :time="formatDate(post.date).time" :image="post._embedded['wp:featuredmedia']['0'].source_url" :slug="post.slug"></post-card>
+                    <post-card :title="post.title" :excerpt="post.excerpt" :id="post.id" :nr="index" :date="formatDate(post.date).date" :time="formatDate(post.date).time" :image="post.image ? post.image.src : null" :slug="post.slug"></post-card>
                 </div>
             </div>
         </div>
@@ -16,19 +16,13 @@
 
 <script>
     import PostCard from '@/components/PostCard'
+    import { POST_LIST_QUERY, slimPost } from '@/utils/wp'
 
     export default {
-        data() {
-            return {
-                posts: [],
-            }
+        async asyncData({ $http }) {
+            const posts = await $http.$get(`wp/v2/posts?${POST_LIST_QUERY}&per_page=100`);
+            return { posts: posts.map(slimPost) }
         },
-        async asyncData({ params, $http }) {
-            const posts = await $http.$get(`wp/v2/posts?_embed&per_page=100`);
-            console.log(posts.length);
-            return { posts }
-        },
-        fetchOnServer: true,
         components: {
             PostCard
         },

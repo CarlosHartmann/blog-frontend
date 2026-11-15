@@ -3,8 +3,8 @@
         <template v-for="page in pages">
             <div class="grid main-grid" v-if="page.title.rendered == 'About'">
                 <back-button class="about-back-button"></back-button>
-                <div class="about-content no-images" v-html="page.content.rendered"></div>
-                <div class="about-images no-text" v-html="page.content.rendered"></div>
+                <div class="about-content" v-html="split(page).text"></div>
+                <div class="about-images" v-html="split(page).figures"></div>
             </div>
         </template>
     </div>
@@ -12,19 +12,24 @@
 
 <script>
     import BackButton from '@/components/BackButton'
+    import { splitContent } from '@/utils/wp'
 
     export default {
         head() {
             return {
                 title: 'About',
                 meta: [
-                    {hid: 'description', name: 'description', content: 'My description'},
-                    {hid: 'ogtitle', property: 'og:title', content: 'Contact page'}
+                    {hid: 'og:title', property: 'og:title', content: 'About · Carlos Ha'}
                 ]
             }
         },
         components: {
             BackButton
+        },
+        methods: {
+            split(page) {
+                return splitContent(page.content.rendered)
+            }
         },
         data() {
             return {
@@ -32,7 +37,6 @@
             }
         },
         async asyncData({ params, $http }) {
-            console.log("async");
             const pages = await $http.$get(`wp/v2/pages?_embed/`);
             return { pages }
         },

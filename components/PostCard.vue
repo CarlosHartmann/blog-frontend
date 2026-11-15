@@ -1,16 +1,16 @@
 <template>
     <nuxt-link :to="'/' + slug" class="grid">
-        <div class="post-card-date-container" :style="{ animationDelay : `${nr/5 + 0.1}s` }">
+        <div class="post-card-date-container" :style="{ animationDelay : delay }">
             <p class="date-post-card" v-html="date"></p>
             <p class="time-post-card" v-html="time"></p>
         </div>
-        <div class="post-card-container" :style="{ animationDelay : `${nr/5 + 0.1}s` }" :id="nr">
+        <div class="post-card-container" :style="{ animationDelay : delay }">
             <h3 class="id-post-card" v-html="nr"></h3>
             <h3 class="title-post-card" v-html="title"></h3>
             <p class="excerpt-post-card text-body" v-html="excerpt"></p>
         </div>
         <div class="post-card-image-container">
-           <img class="post-card-image" :src="image" />
+           <img v-if="image" class="post-card-image" :src="image" alt="" loading="lazy" />
         </div>
     </nuxt-link>
 </template>
@@ -25,7 +25,14 @@
             'date',
             'time',
             'slug'
-        ]
+        ],
+        computed: {
+            // Stagger the first few cards only; with 30+ posts the last ones
+            // used to stay invisible for six seconds.
+            delay() {
+                return `${Math.min(this.nr, 6) / 5 + 0.1}s`
+            }
+        }
     }
 </script>
 

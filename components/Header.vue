@@ -19,15 +19,8 @@
         data() {
             return {
                 showMobileMenu: false,
-                pages: [],
             }
         },
-        async asyncData({ params, $http }) {
-            const pages = await $http.$get(`wp/v2/pages?_embed`);
-            console.log(pages);
-            return { pages }
-        },
-        fetchOnServer: true,
     }
 </script>
 
