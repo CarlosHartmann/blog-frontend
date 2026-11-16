@@ -29,16 +29,9 @@ export function menu(lang) {
         { key: 'they', label: t.subThey, path: '/they/' },
       ],
     },
-    {
-      key: 'teaching',
-      label: t.nav.teaching,
-      path: '/feedback/',
-      pages: ['feedback', 'teaching'],
-      sub: [
-        { key: 'feedback', label: t.nav.feedback, path: '/feedback/' },
-        { key: 'teaching', label: t.subSendoffs, path: '/teaching/' },
-      ],
-    },
+    // The send-off page is archived (see archive/teaching/README.md), so this
+    // entry has a single page and no second row for now.
+    { key: 'teaching', label: t.nav.teaching, path: '/feedback/', pages: ['feedback'] },
     {
       key: 'about',
       label: t.nav.about,
