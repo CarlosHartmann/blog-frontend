@@ -705,6 +705,114 @@ a:hover {
   hyphens: manual;
 }
 
+/* ---------- feedback ---------- */
+
+/* The one quote that opens the page, set like a line typed at a prompt. */
+.voice-first {
+  margin: 0 0 4px;
+  padding: 30px 24px 28px;
+  text-align: center;
+  border: 1px solid var(--paper-line);
+  outline: 1px solid var(--leaf-gold);
+  outline-offset: -6px;
+}
+
+.voice-first blockquote {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: clamp(1.2rem, 4.6vw, 2.1rem);
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--rubric);
+}
+
+.voice-first .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  margin-left: 0.15em;
+  vertical-align: -0.08em;
+  background: var(--rubric);
+}
+
+.voice-first figcaption {
+  margin-top: 14px;
+}
+
+.voices figure {
+  grid-column: 2;
+  min-width: 0;
+  margin: 0;
+}
+
+.voice-first blockquote p,
+.voices blockquote p {
+  margin: 0;
+}
+
+.voices blockquote {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  hyphens: auto;
+}
+
+/* Quotation marks follow the language of the quote, not of the page. */
+.voices blockquote:lang(de) {
+  quotes: '«' '»' '‹' '›';
+}
+
+.voices blockquote:lang(en) {
+  quotes: '“' '”' '‘' '’';
+}
+
+.voices blockquote p::before {
+  content: open-quote;
+}
+
+.voices blockquote p::after {
+  content: close-quote;
+}
+
+.voices .pull blockquote {
+  font-size: 1.5rem;
+  line-height: 1.28;
+  font-style: italic;
+  text-wrap: balance;
+  hyphens: manual;
+}
+
+.voice-first figcaption,
+.voices figcaption {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+.voices figcaption {
+  margin-top: 6px;
+}
+
+/* The survey question a quote answers. */
+.voice-first .asked,
+.voices .asked {
+  margin: 0 0 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+}
+
+.voices .voice-note {
+  margin: 10px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--rubric);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink-dim);
+}
+
 /* ---------- forms ---------- */
 
 .form {
@@ -949,8 +1057,13 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
-  .entries .detail {
+  .entries .detail,
+  .voices figure {
     grid-column: 1;
+  }
+
+  .voices .pull blockquote {
+    font-size: 1.3rem;
   }
 
   .site-footer {

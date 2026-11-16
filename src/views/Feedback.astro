@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../lib/i18n.js';
+import { sources, featured, sections, pick } from '../data/feedback.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const sourceLine = (key) => sources[key][lang];
+---
+
+<Base lang={lang} path="/feedback/" title={t.feedbackTitle} description={t.feedbackIntro} current="feedback">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <nav aria-label={t.pubsSections}>
+          {sections.map((section) => <a href={`#${section.id}`}>{pick(section.title, lang)}</a>)}
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{t.feedbackKicker}</p>
+        <h1 class="title">{t.feedbackTitle}</h1>
+        <p class="lede">{t.feedbackIntro}</p>
+        <div class="rule" aria-hidden="true"></div>
+
+        <figure class="voice-first">
+          <p class="asked">{featured.asked}</p>
+          <blockquote lang={featured.lang}>
+            <p>{featured.text}<span class="cursor" aria-hidden="true"></span></p>
+          </blockquote>
+          <figcaption>{pick(sources[featured.src].tag, lang)} · {sourceLine(featured.src)}</figcaption>
+        </figure>
+
+        <div class="entries voices">
+          {
+            sections.map((section) => (
+              <>
+                <h2 id={section.id}>
+                  <span class="hash" aria-hidden="true">#</span>
+                  {pick(section.title, lang)}
+                </h2>
+                <ul>
+                  {section.quotes.map((quote) => (
+                    <li class={quote.pull ? 'pull' : undefined}>
+                      <span class="year">{pick(sources[quote.src].tag, lang)}</span>
+                      <figure>
+                        {quote.asked && <p class="asked">{quote.asked}</p>}
+                        <blockquote lang={quote.lang}>
+                          <p>{quote.text}</p>
+                        </blockquote>
+                        <figcaption>{sourceLine(quote.src)}</figcaption>
+                        {quote.note && <p class="voice-note">{pick(quote.note, lang)}</p>}
+                      </figure>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Base>
