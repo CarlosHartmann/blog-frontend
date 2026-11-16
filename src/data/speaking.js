@@ -36,6 +36,7 @@ export const speaking = {
         items: [
           { when: 'Tagungen', what: 'Vorträge und Poster', detail: 'ICAME, ISLE und weitere', url: '/publications/#vortraege' },
           { when: 'Lehre', what: 'Was Studierende sagen', detail: 'Auszüge aus Lehrevaluationen', url: '/feedback/' },
+          { when: 'Lehre', what: 'Send-offs', detail: 'Auszüge aus meinen Mails nach jeder Sitzung', url: '/teaching/' },
           { when: 'Film', what: 'Filmkommentare zum Nachlesen', url: '/film/' },
         ],
       },
@@ -74,6 +75,7 @@ export const speaking = {
         items: [
           { when: 'Conferences', what: 'Talks and posters', detail: 'ICAME, ISLE and others', url: '/publications/#vortraege' },
           { when: 'Teaching', what: 'What students say', detail: 'Excerpts from course evaluations', url: '/feedback/' },
+          { when: 'Teaching', what: 'Send-offs', detail: 'Excerpts from my emails after every session', url: '/teaching/' },
           { when: 'Film', what: 'Film commentaries to read', url: '/film/' },
         ],
       },

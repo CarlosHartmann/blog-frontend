@@ -1,0 +1,115 @@
+---
+// Teaching page: excerpts from the send-off emails. Content in src/data/teaching.js.
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/i18n.js';
+import { courses, voice, sections, signOffs, pictures, copy, pick } from '../data/teaching.js';
+
+const { lang } = Astro.props;
+const c = copy[lang];
+// "*Gestures vaguely*" is a stage direction: set it in italics.
+const signOff = (text) => text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+const nav = [
+  ...sections.map((section) => ({ id: section.id, title: pick(section.title, lang) })),
+  { id: 'grussformeln', title: c.signOffsTitle },
+  { id: 'folien', title: c.picturesTitle },
+  { id: 'kurse', title: c.coursesTitle },
+];
+---
+
+<Base lang={lang} path="/teaching/" title={`${c.kicker}: ${c.title}`} description={c.lede} current="teaching">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <nav aria-label={c.title}>
+          {nav.map((item) => <a href={`#${item.id}`}>{item.title}</a>)}
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{c.kicker}</p>
+        <h1 class="title">{c.title}</h1>
+        <p class="lede">{c.lede}</p>
+        <div class="rule" aria-hidden="true"></div>
+
+        <figure class="explainer-voice">
+          <blockquote lang="en">{voice.text}</blockquote>
+          <figcaption>
+            {pick(voice.source, lang)} · <a href={href(lang, '/feedback/')}>{c.voiceLink}</a>
+          </figcaption>
+        </figure>
+
+        <div class="entries sheet sendoffs">
+          {
+            sections.map((section) => (
+              <>
+                <h2 id={section.id}>
+                  <span class="hash" aria-hidden="true">#</span>
+                  {pick(section.title, lang)}
+                </h2>
+                {section.note && <p class="sheet-text">{pick(section.note, lang)}</p>}
+                {section.excerpts.map((excerpt) => (
+                  <article class:list={['sendoff', { pull: excerpt.pull }]}>
+                    <h3 lang="en">{excerpt.head}</h3>
+                    <div class="sendoff-body" lang="en">
+                      {(excerpt.text || []).map((paragraph) => <p set:html={paragraph} />)}
+                      {excerpt.list && (
+                        <ul>
+                          {excerpt.list.map((item) => (
+                            <li set:html={item} />
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <p class="sendoff-source">{pick(excerpt.source, lang)}</p>
+                  </article>
+                ))}
+              </>
+            ))
+          }
+
+          <h2 id="grussformeln">
+            <span class="hash" aria-hidden="true">#</span>
+            {c.signOffsTitle}
+          </h2>
+          <p class="sheet-text">{c.signOffsNote}</p>
+          <p class="signoffs" lang="en">
+            {signOffs.map((text) => <span set:html={signOff(text)} />)}
+          </p>
+
+          <h2 id="folien">
+            <span class="hash" aria-hidden="true">#</span>
+            {c.picturesTitle}
+          </h2>
+          <p class="sheet-text">{c.picturesNote}</p>
+          <div class="slide-pictures">
+            {
+              pictures.map((picture) => (
+                <figure>
+                  <img src={picture.src} alt="" width="640" height="640" loading="lazy" decoding="async" />
+                  <figcaption lang="en">{picture.prompt}</figcaption>
+                </figure>
+              ))
+            }
+          </div>
+
+          <h2 id="kurse">
+            <span class="hash" aria-hidden="true">#</span>
+            {c.coursesTitle}
+          </h2>
+          <p class="sheet-text">{c.coursesNote}</p>
+          <ul>
+            {
+              courses.map((item) => (
+                <li>
+                  <span class="year">{pick(item.when, lang)}</span>
+                  <span class="what">{pick(item.what, lang)}</span>
+                  {item.detail && <span class="detail">{pick(item.detail, lang)}</span>}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</Base>

@@ -1,4 +1,4 @@
-// The site's menu: five entries in the main bar. An entry with `sub` shows a
+// The site's menu: six entries in the main bar. An entry with `sub` shows a
 // second row with those links on all of its pages.
 // `pages` lists the `current` keys of the pages that belong to an entry
 // (every view passes its key to the Base layout).
@@ -30,14 +30,23 @@ export function menu(lang) {
       ],
     },
     {
+      key: 'teaching',
+      label: t.nav.teaching,
+      path: '/teaching/',
+      pages: ['teaching', 'feedback'],
+      sub: [
+        { key: 'teaching', label: t.subSendoffs, path: '/teaching/' },
+        { key: 'feedback', label: t.nav.feedback, path: '/feedback/' },
+      ],
+    },
+    {
       key: 'about',
       label: t.nav.about,
       path: '/about/',
-      pages: ['about', 'cv', 'feedback', 'speaking'],
+      pages: ['about', 'cv', 'speaking'],
       sub: [
         { key: 'about', label: t.nav.about, path: '/about/' },
         { key: 'cv', label: t.nav.cv, path: '/cv/' },
-        { key: 'feedback', label: t.nav.feedback, path: '/feedback/' },
         { key: 'speaking', label: t.footerSpeaking, path: '/speaking/' },
       ],
     },
