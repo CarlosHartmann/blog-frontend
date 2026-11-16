@@ -7,6 +7,8 @@ const { lang } = Astro.props;
 const t = ui[lang];
 const posts = await getPosts();
 const first = posts.find((p) => p.image);
+// English list: English title and excerpt where a translation exists.
+const shown = (p) => (lang === 'en' && p.en ? p.en : p);
 ---
 
 <Base lang={lang} path="/posts/" title={t.blogTitle} current="blog">
@@ -26,18 +28,25 @@ const first = posts.find((p) => p.image);
         <h1 class="title">{t.blogTitle}</h1>
         <p class="lede">{t.blogIntro}</p>
         <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
-        <ol class="register" start="0" lang="de">
+        <ol class="register" start="0">
           {
-            posts.map((post) => (
-              <li>
-                <a href={href(lang, `/${post.slug}/`)} data-img={post.image ? post.image.preview : ''} data-title={post.titleText}>
-                  <span class="nr" aria-hidden="true">{post.nr}</span>
-                  <time class="mono when" datetime={post.date} lang={lang}>{formatDate(post.date, lang)}</time>
-                  <h2 set:html={post.title} />
-                  <p>{post.excerpt}</p>
-                </a>
-              </li>
-            ))
+            posts.map((post) => {
+              const entry = shown(post);
+              const entryLang = entry === post ? 'de' : 'en';
+              return (
+                <li lang={entryLang}>
+                  <a href={href(lang, `/${post.slug}/`)} data-img={post.image ? post.image.preview : ''} data-title={entry.titleText}>
+                    <span class="nr" aria-hidden="true">{post.nr}</span>
+                    <span class="mono when" lang={lang}>
+                      <time datetime={post.date}>{formatDate(post.date, lang)}</time>
+                      {entryLang !== lang && ` · ${t.untranslated}`}
+                    </span>
+                    <h2 set:html={entry.title} />
+                    <p>{entry.excerpt}</p>
+                  </a>
+                </li>
+              );
+            })
           }
         </ol>
       </section>
@@ -46,7 +55,7 @@ const first = posts.find((p) => p.image);
         first && (
           <figure class="preview" aria-hidden="true">
             <img id="preview-img" src={first.image.preview} alt="" />
-            <figcaption id="preview-cap">{first.titleText}</figcaption>
+            <figcaption id="preview-cap">{shown(first).titleText}</figcaption>
           </figure>
         )
       }

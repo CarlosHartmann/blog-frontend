@@ -3,6 +3,13 @@
 //
 // Each entry: year (free text), title, detail in both languages (or one
 // string for both), an optional url, or `post` with the slug of a blog post.
+// A short account of the research, shown at the top of the page.
+// Source: summary of the Doc.Mobility research plan (2026).
+export const research = {
+  de: 'Meine Forschung folgt dem Pronomen «they». Seit der zweiten Hälfte des 20. Jahrhunderts bezieht es sich immer häufiger nicht nur auf unbestimmte, sondern auch auf ganz bestimmte einzelne Personen. Weil das Reden über das singulare «they» seit jeher mit gesellschaftlichen und politischen Haltungen verflochten ist, verrät sein Gebrauch viel über den heutigen Umgang mit Gleichstellung und geschlechtergerechter Sprache. Singulare und plurale Verwendungen von Hand zu trennen ist aufwendig, weshalb das Thema lange auf Experimente und Umfragen beschränkt blieb. Ich prüfe, wie zuverlässig Large Language Models diese Unterscheidung treffen, und wende das Verfahren auf Reddit-Daten ab 2010 an, um zu zeigen, wann, unter welchen Bedingungen und in welchen Gruppen sich der neue Gebrauch verbreitet hat.',
+  en: 'My research follows the pronoun “they.” Since the second half of the 20th century it has increasingly come to refer not only to generic antecedents but to specific individuals as well. Because talk about singular “they” has always been entangled with social and political attitudes, the way it is used reveals a good deal about today’s culture of gender equality and inclusive language. Telling singular from plural uses by hand is slow, which long confined the topic to experiments and surveys. I test how reliably large language models can make this distinction and apply the method to Reddit data from 2010 onward to show when, under what conditions and among which groups the new usage spread.',
+};
+
 export const sections = [
   {
     id: 'artikel',
@@ -16,9 +23,9 @@ export const sections = [
         url: 'https://doi.org/10.1016/j.acorp.2026.100199',
       },
       {
-        year: '2026',
-        title: 'Who is the Pronoun Pro? Comparing LLMs and Trained Human Annotators in Pronoun Resolution',
-        detail: { de: 'Preprint, OSF', en: 'Preprint, OSF' },
+        year: '2027',
+        title: 'Who is the Pronoun Pro? Comparing LLMs and Humans at Number-Disambiguation of they',
+        detail: { de: 'Zur Publikation angenommen (2027); Preprint auf OSF', en: 'Accepted for publication (2027); preprint on OSF' },
         url: 'https://doi.org/10.17605/OSF.IO/2J4KE',
       },
       {
@@ -36,7 +43,7 @@ export const sections = [
       {
         year: '2025',
         title: 'Reddit FlairShare',
-        detail: { de: 'Datensatz, OSF', en: 'Dataset, OSF' },
+        detail: { de: 'Datensatz, OSF; gespiegelt unter doi.org/10.48656/4xzy-gc80', en: 'Dataset, OSF; mirrored at doi.org/10.48656/4xzy-gc80' },
         url: 'https://doi.org/10.17605/OSF.IO/S36PQ',
       },
       {
@@ -62,17 +69,20 @@ export const sections = [
       },
       {
         year: '2025',
-        title: 'Who is the Pronoun Pro? Comparing LLMs and Trained Human Annotators in Pronoun Resolution',
+        title: 'Who is the Pronoun Pro?',
         detail: {
-          de: 'Workshop «Large Language Models for Linguistic Analyses: Applications and Limitations», Köln, 24.–25. November 2025',
-          en: 'Workshop “Large Language Models for Linguistic Analyses: Applications and Limitations”, Cologne, 24–25 November 2025',
+          de: 'Poster, Workshop «Large Language Models for Linguistic Analyses: Applications and Limitations», Universität zu Köln, 24.–25. November 2025',
+          en: 'Poster, workshop “Large Language Models for Linguistic Analyses: Applications and Limitations”, University of Cologne, 24–25 November 2025',
         },
         url: 'https://doi.org/10.17605/OSF.IO/2J4KE',
       },
       {
         year: '2025',
-        title: 'Who is the Pronoun Pro? Comparing LLMs and Trained Human Annotators in Pronoun Resolution',
-        detail: { de: 'ISLE 8, Santiago de Compostela, 2. September 2025', en: 'ISLE 8, Santiago de Compostela, 2 September 2025' },
+        title: 'To whom does they refer? Comparing LLMs and Trained Human Annotators in Pronoun Resolution',
+        detail: {
+          de: '8. Konferenz der International Society for the Linguistics of English (ISLE 8), Santiago de Compostela, 2. September 2025',
+          en: '8th Conference of the International Society for the Linguistics of English (ISLE 8), Santiago de Compostela, 2 September 2025',
+        },
       },
       {
         year: '2024',
@@ -91,9 +101,20 @@ export const sections = [
     title: { de: 'Film', en: 'Film' },
     items: [
       {
-        year: '',
-        title: 'Filmstelle der ETH Zürich',
-        detail: { de: 'Programmgestaltung, zeitweise Leitung des Kinos', en: 'Programming; for a time head of the cinema' },
+        year: '2021',
+        title: '«Puritanische Exzesse. Ein Filmkommentar zu ‹Bully› von Larry Clark»',
+        detail: {
+          de: 'In: Yvonne Frenzel Ganz und Andrea Kager (Hg.), Cinépassion – Coming of Age. Giessen: Psychosozial-Verlag',
+          en: 'In: Yvonne Frenzel Ganz and Andrea Kager (eds.), Cinépassion – Coming of Age. Giessen: Psychosozial-Verlag',
+        },
+      },
+      {
+        year: '2017–2020',
+        title: { de: 'Filmstelle VSETH, Studierendenkino der ETH Zürich', en: 'Filmstelle VSETH, the student cinema of ETH Zurich' },
+        detail: {
+          de: 'Vorstandsmitglied: Programmgestaltung, Mittelbeschaffung, Gesamtplanung; zeitweise Leitung des Kinos',
+          en: 'Board member: programming, fundraising, overall planning; for a time head of the cinema',
+        },
         url: 'https://filmstelle.ch',
       },
       {

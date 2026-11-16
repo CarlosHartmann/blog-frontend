@@ -667,6 +667,31 @@ a:hover {
   color: var(--ink-dim);
 }
 
+.cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin: 20px 0 0;
+}
+
+.cv-links a {
+  padding: 8px 0;
+  color: var(--rubric);
+}
+
+.cv-note {
+  margin: 4px 0 14px;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  font-style: italic;
+  border: 1px solid var(--paper-line);
+}
+
+.entries .year {
+  hyphens: manual;
+}
+
 /* ---------- forms ---------- */
 
 .form {

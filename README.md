@@ -19,15 +19,17 @@ deployed on Netlify, content from the headless WordPress at `admin.smog.sh`.
 | --- | --- |
 | Interface texts (DE/EN) | `src/lib/i18n.js` |
 | Publications & activities | `src/data/publications.js` |
-| English About text | `src/data/about.en.js` (or a WordPress page with slug `about-en`) |
+| Curriculum vitae | `src/data/cv.js` |
+| English versions of posts | fields "English title" / "English text" on each post in WordPress |
+| English About text | WordPress page with slug `about-en` (fallback: `src/data/about.en.js`) |
 | WordPress fetching | `src/lib/wp.js` |
 | Clean-up of WordPress HTML | `src/lib/content.js` |
 | Look | `src/styles/global.css` |
 
 ## Home-page banner
 
-The home page shows one image per day from the "banner" media folder in
-WordPress (FileBird folder 1). Reading that folder needs the FileBird API key.
+The home page shows a different image on every visit, taken from the
+"Banners" media folder in WordPress (FileBird folder 1). Reading that folder needs the FileBird API key.
 Set it as the build variable `FILEBIRD_TOKEN` in Netlify (never in this
 repository). Without it the site shows a single fallback image.
 

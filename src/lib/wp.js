@@ -5,6 +5,7 @@ import { plainText, prepareContent } from './content.js';
 export const API = 'https://admin.smog.sh/wp-json/';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 // The WordPress host is shared hosting and answers 503/508 under load, so
 // requests go out one at a time and are retried with a growing pause.
@@ -39,13 +40,19 @@ function featuredImage(raw) {
 async function loadPosts() {
   const raw = [];
   for (let page = 1; ; page++) {
-    const { data, headers } = await request(`wp/v2/posts?_embed=wp:featuredmedia&per_page=50&page=${page}`);
+    const { data, headers } = await request(`wp/v2/posts?_embed=wp:featuredmedia&acf_format=standard&per_page=50&page=${page}`);
     raw.push(...data);
     if (page >= Number(headers.get('x-wp-totalpages') || 1)) break;
   }
   raw.sort((a, b) => (a.date < b.date ? 1 : -1));
   return raw.map((post, index) => {
     const titleText = plainText(post.title.rendered);
+    // English version: the ACF fields "English title" and "English text" on
+    // the post's edit screen. A post without English text has `en: null` and
+    // is shown in German on the English pages.
+    const acf = post.acf && !Array.isArray(post.acf) ? post.acf : {};
+    const enHtml = (acf.content_en || '').trim();
+    const enTitle = (acf.title_en || '').trim() || titleText;
     return {
       id: post.id,
       slug: post.slug,
@@ -57,6 +64,7 @@ async function loadPosts() {
       titleText,
       image: featuredImage(post),
       ...prepareContent(post.content.rendered, titleText),
+      en: enHtml ? { title: escapeHtml(enTitle), titleText: enTitle, ...prepareContent(enHtml, enTitle) } : null,
     };
   });
 }
@@ -82,8 +90,8 @@ export function getPage(slug) {
   return pages.get(slug);
 }
 
-// Home-page banners: every image in the "banner" media folder (FileBird
-// folder 1). The FileBird key is a secret and is read from the FILEBIRD_TOKEN
+// Home-page banners: every image in the "Banners" media folder (FileBird
+// folder 1). The home page shows a different one on every visit. The FileBird key is a secret and is read from the FILEBIRD_TOKEN
 // build variable; without it the site shows the one fallback image.
 const FALLBACK_BANNERS = [
   { src: 'https://admin.smog.sh/wp-content/uploads/2023/03/vlcsnap-00238.jpg', alt: '', width: 704, height: 512 },

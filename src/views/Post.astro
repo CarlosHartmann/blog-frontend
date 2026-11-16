@@ -9,17 +9,23 @@ const posts = await getPosts();
 const index = posts.findIndex((p) => p.slug === post.slug);
 const newer = posts[index - 1];
 const older = posts[index + 1];
+
+// On the English pages a post shows its English version if it has one,
+// otherwise the German text with a note.
+const inEnglish = (p) => (lang === 'en' && p.en ? p.en : p);
+const body = inEnglish(post);
+const bodyLang = body === post ? 'de' : 'en';
 ---
 
 <Base
   lang={lang}
   path={`/${post.slug}/`}
-  title={post.titleText}
-  description={post.excerpt}
+  title={body.titleText}
+  description={body.excerpt}
   image={post.image}
   published={`${post.dateGmt}Z`}
   article
-  canonicalLang="de"
+  canonicalLang={bodyLang}
   current="blog"
 >
   <main id="inhalt" class="page">
@@ -37,24 +43,24 @@ const older = posts[index + 1];
           </div>
           <div>
             <dt>{t.length}</dt>
-            <dd>{t.readingTime(post.minutes)}</dd>
+            <dd>{t.readingTime(body.minutes)}</dd>
           </div>
         </dl>
-        {t.germanOnly && <p class="note" style="margin: 0">{t.germanOnly}</p>}
+        {bodyLang !== lang && <p class="note" style="margin: 0">{t.germanOnly}</p>}
       </aside>
 
-      <article class="paper" lang="de">
-        <h1 class="title" set:html={post.title} />
+      <article class="paper" lang={bodyLang}>
+        <h1 class="title" set:html={body.title} />
         <div class="rule" aria-hidden="true"></div>
         <div class="prose">
           {
-            (post.toc.length > 0 || post.lead) && (
+            (body.toc.length > 0 || body.lead) && (
               <div class="gloss lead">
-                {post.toc.length > 0 && (
+                {body.toc.length > 0 && (
                   <nav class="gloss toc" aria-label={t.contents}>
                     <span class="label" lang={lang}>{t.contents}</span>
                     <ol>
-                      {post.toc.map((entry) => (
+                      {body.toc.map((entry) => (
                         <li>
                           <a href={`#${entry.id}`}>
                             <span class="num">{entry.num}</span>
@@ -65,18 +71,18 @@ const older = posts[index + 1];
                     </ol>
                   </nav>
                 )}
-                <Fragment set:html={post.lead} />
+                <Fragment set:html={body.lead} />
               </div>
             )
           }
-          <Fragment set:html={post.html} />
+          <Fragment set:html={body.html} />
         </div>
         <nav class="post-nav" aria-label={t.blogTitle}>
           {
             older ? (
               <a href={href(lang, `/${older.slug}/`)} rel="prev">
                 <span class="mono" lang={lang}>← {t.older}</span>
-                <span set:html={older.title} />
+                <span set:html={inEnglish(older).title} />
               </a>
             ) : (
               <span />
@@ -86,7 +92,7 @@ const older = posts[index + 1];
             newer && (
               <a href={href(lang, `/${newer.slug}/`)} rel="next">
                 <span class="mono" lang={lang}>{t.newer} →</span>
-                <span set:html={newer.title} />
+                <span set:html={inEnglish(newer).title} />
               </a>
             )
           }

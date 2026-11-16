@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { ui, href } from '../lib/i18n.js';
-import { sections, pick } from '../data/publications.js';
+import { research, sections, pick } from '../data/publications.js';
 
 const { lang } = Astro.props;
 const t = ui[lang];
@@ -20,7 +20,10 @@ const t = ui[lang];
         <p class="kicker mono">{t.pubsKicker}</p>
         <h1 class="title">{t.pubsTitle}</h1>
         <p class="lede">{t.pubsIntro}</p>
-        <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
+        <div class="rule" aria-hidden="true"></div>
+        <div class="prose">
+          <p class="initiale">{research[lang]}</p>
+        </div>
         <div class="entries">
           {
             sections.map((section) => {

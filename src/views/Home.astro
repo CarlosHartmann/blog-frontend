@@ -1,6 +1,7 @@
 ---
 // Landing page: one film still, full screen, with the navigation on top.
-// The still changes every day; the list comes from the banner media folder.
+// Every visit shows a different still (reload, coming back from another page,
+// the browser's Back button); the list comes from the banner media folder.
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
@@ -19,25 +20,37 @@ const banners = await Promise.all(
     return { src: image.src, alt: banner.alt };
   }),
 );
-const today = banners[Math.floor(Date.now() / 86400000) % banners.length];
 ---
 
 <Base lang={lang} path="/" current="home" bare>
-  <link slot="head" rel="preload" as="image" href={today.src} />
   <main id="inhalt" class="home">
-    <img class="banner" id="banner" src={today.src} alt={today.alt} fetchpriority="high" />
+    <img class="banner" id="banner" alt="" fetchpriority="high" />
+    <noscript><img class="banner" src={banners[0].src} alt={banners[0].alt} /></noscript>
     <div class="home-box">
       <h1 class="wordmark" style="margin: 0; font-weight: 400">smog.sh</h1>
       <Nav lang={lang} path="/" current="home" />
     </div>
   </main>
   <script is:inline define:vars={{ banners }}>
-    // The page is built once but visited on many days: pick today's still here.
-    const pick = banners[Math.floor(Date.now() / 86400000) % banners.length];
-    const img = document.getElementById('banner');
-    if (img && pick && img.getAttribute('src') !== pick.src) {
-      img.src = pick.src;
-      img.alt = pick.alt;
-    }
+    // Pick a still at random, never the one shown on the previous visit.
+    const show = () => {
+      let last = -1;
+      try {
+        last = Number(sessionStorage.getItem('banner') ?? -1);
+      } catch (e) {}
+      let next = Math.floor(Math.random() * banners.length);
+      if (banners.length > 1 && next === last) next = (next + 1) % banners.length;
+      try {
+        sessionStorage.setItem('banner', String(next));
+      } catch (e) {}
+      const img = document.getElementById('banner');
+      img.src = banners[next].src;
+      img.alt = banners[next].alt;
+    };
+    show();
+    // Pages restored by the Back button are not reloaded, so pick again.
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) show();
+    });
   </script>
 </Base>
