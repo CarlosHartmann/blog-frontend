@@ -80,7 +80,7 @@ export const copy = {
         risingText: 'Seit 2018 steigt der Anteil von <em>themself</em> in allen drei Gruppen: schwach, aber messbar.',
       },
       why: {
-        title: 'Warum das zählt',
+        title: 'Warum das wichtig ist',
         text: [
           'Die meisten Autokorrekturen ersetzen <em>themself</em> ungefragt durch <em>themselves</em>, vor allem auf dem Handy. Dass die Form trotzdem so oft stehen bleibt, heisst: Menschen wählen sie mit Absicht.',
           '<em>Themself</em> ist kein Grammatikfehler, sondern ein neues Mittel, Geschlechtsneutralität zu markieren. Stilratgeber und Sprachsoftware täten gut daran, es als Variante gelten zu lassen.',
