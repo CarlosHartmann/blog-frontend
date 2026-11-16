@@ -38,6 +38,11 @@ export const sources = {
     de: `BA-Seminar «Analysing Language on Social Media», Universität Zürich · ${evaluation.de}`,
     en: `BA seminar “Analysing Language on Social Media”, University of Zurich · ${evaluation.en}`,
   },
+  school: {
+    tag: { de: 'Gymnasium', en: 'High school' },
+    de: 'Kantonsschule Enge, Zürich · psychoanalytische Filmanalyse und ästhetische Theorie mit Gymnasiastinnen und Gymnasiasten · Rückmeldung, anonym',
+    en: 'Kantonsschule Enge (high school), Zurich · psychoanalytic film analysis and aesthetic theory with the students · feedback, anonymous',
+  },
   archive: {
     tag: '2019–2022',
     de: 'Arbeitszeugnis des Staatsarchivs des Kantons Zürich',
@@ -223,6 +228,12 @@ export const sections = [
     id: 'arbeit',
     title: { de: 'Ausserhalb des Seminarraums', en: 'Beyond the classroom' },
     quotes: [
+      {
+        src: 'school',
+        lang: 'de',
+        pull: true,
+        text: 'Super Film, Carlos cooler Typ […]',
+      },
       {
         src: 'archive',
         lang: 'de',
