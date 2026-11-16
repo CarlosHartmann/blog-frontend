@@ -123,8 +123,8 @@ export const sections = [
     id: 'lehre',
     title: { de: 'Lehre & Betreuung', en: 'Teaching & supervision' },
     note: {
-      de: 'In den Lehrevaluationen erhielt ich über drei Jahre und verschiedene Kursformate hinweg durchgehend starke bis sehr starke Zufriedenheitswerte. Besonders hervorgehoben wurden die Erreichbarkeit, das Engagement und eine inklusive, zugängliche Atmosphäre im Unterricht. (Aus dem Arbeitszeugnis des Englischen Seminars der Universität Zürich, Juli 2026)',
-      en: 'In course evaluations over three years and several course formats, students consistently reported strong to very strong satisfaction. They singled out my availability, my commitment and an inclusive, accessible classroom atmosphere. (From the reference letter of the English Department, University of Zurich, July 2026)',
+      de: 'In den Lehrevaluationen erhielt ich über drei Jahre und verschiedene Kursformate hinweg durchgehend starke bis sehr starke Zufriedenheitswerte. Besonders hervorgehoben wurden die Erreichbarkeit, das Engagement und eine inklusive, zugängliche Atmosphäre im Unterricht.',
+      en: 'In course evaluations over three years and several course formats, students consistently reported strong to very strong satisfaction. They singled out my availability, my commitment and an inclusive, accessible classroom atmosphere.',
     },
     items: [
       {
