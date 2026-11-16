@@ -84,7 +84,7 @@ export const copy = {
         text: [
           'Die meisten Autokorrekturen ersetzen <em>themself</em> ungefragt durch <em>themselves</em>, vor allem auf dem Handy. Dass die Form trotzdem so oft stehen bleibt, heisst: Menschen wählen sie mit Absicht.',
           '<em>Themself</em> ist kein Grammatikfehler, sondern ein neues Mittel, Geschlechtsneutralität zu markieren. Stilratgeber und Sprachsoftware täten gut daran, es als Variante gelten zu lassen.',
-          'Und eine Ironie zum Schluss: Setzt sich die Unterscheidung durch, bekommt ausgerechnet das nicht-binäre Pronomen eine binäre Form.',
+          'Und eine Ironie zum Schluss: Setzt sich die Unterscheidung durch, bekommt ausgerechnet das nicht-binäre Pronomen eine binäre Unterscheidung, nämlich nach Zahl.',
         ],
       },
       more: {
@@ -148,7 +148,7 @@ export const copy = {
         text: [
           'Most autocorrect tools replace <em>themself</em> with <em>themselves</em> without asking, especially on phones. That the form survives so often anyway means people choose it on purpose.',
           '<em>Themself</em> is not a grammatical error but a new means of marking gender neutrality. Style guides and language software would do well to accept it as a variant.',
-          'And an irony to end on: if the distinction takes hold, it is the non-binary pronoun, of all things, that gets a binary form.',
+          'And an irony to end on: if the distinction takes hold, it is the non-binary pronoun, of all things, that gets a binary distinction, namely by number.',
         ],
       },
       more: {
