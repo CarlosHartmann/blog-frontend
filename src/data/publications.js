@@ -6,8 +6,8 @@
 // A short account of the research, shown at the top of the page.
 // Source: summary of the Doc.Mobility research plan (2026).
 export const research = {
-  de: 'Meine Forschung folgt dem Pronomen «they». Seit der zweiten Hälfte des 20. Jahrhunderts bezieht es sich immer häufiger nicht nur auf unbestimmte, sondern auch auf ganz bestimmte einzelne Personen. Weil das Reden über das singulare «they» seit jeher mit gesellschaftlichen und politischen Haltungen verflochten ist, verrät sein Gebrauch viel über den heutigen Umgang mit Gleichstellung und geschlechtergerechter Sprache. Singulare und plurale Verwendungen von Hand zu trennen ist aufwendig, weshalb das Thema lange auf Experimente und Umfragen beschränkt blieb. Ich prüfe, wie zuverlässig Large Language Models diese Unterscheidung treffen, und wende das Verfahren auf Reddit-Daten ab 2010 an, um zu zeigen, wann, unter welchen Bedingungen und in welchen Gruppen sich der neue Gebrauch verbreitet hat.',
-  en: 'My research follows the pronoun “they.” Since the second half of the 20th century it has increasingly come to refer not only to generic antecedents but to specific individuals as well. Because talk about singular “they” has always been entangled with social and political attitudes, the way it is used reveals a good deal about today’s culture of gender equality and inclusive language. Telling singular from plural uses by hand is slow, which long confined the topic to experiments and surveys. I test how reliably large language models can make this distinction and apply the method to Reddit data from 2010 onward to show when, under what conditions and among which groups the new usage spread.',
+  de: 'Meine Forschung folgt dem Pronomen «they». Seit der zweiten Hälfte des 20. Jahrhunderts bezieht es sich immer häufiger nicht nur auf unbestimmte/generische, sondern auch auf bestimmte, diskursbekannte einzelne Personen – man kennt es heutzutage als das sog. non-binäre «they», das ist aber nur ein neuerer Aspekt davon. Weil der Diskurs über das singulare «they» seit jeher mit gesellschaftlichen und politischen Haltungen verflochten ist, verrät sein Gebrauch viel über den heutigen Umgang mit Gleichstellung und geschlechtergerechter Sprache. Singulare und plurale Verwendungen von Hand zu trennen ist aufwendig, weshalb das Thema lange auf Experimente und Umfragen beschränkt blieb. Ich habe geprüft, wie zuverlässig Large Language Models diese Unterscheidung treffen, und wende das Verfahren auf Reddit-Daten ab 2010 an, um zu zeigen, wann, unter welchen Bedingungen und in welchen Gruppen sich der neue Gebrauch verbreitet hat. LLMs haben jetzt die Forschungsmöglichkeiten in diesem und anderen Feldern massiv erweitert und ich möchte Teil dieser Expansion sein.',
+  en: 'My research follows the pronoun “they.” Since the second half of the 20th century it has increasingly come to refer not only to indefinite or generic antecedents but also to specific individuals already known in the discourse. Today this is widely known as nonbinary “they,” but that is only one of its more recent aspects. Because the discourse about singular “they” has always been entangled with social and political attitudes, its use reveals a good deal about how gender equality and inclusive language are handled today. Telling singular from plural uses by hand is slow, which long confined the topic to experiments and surveys. I have tested how reliably large language models make this distinction, and I am applying the method to Reddit data from 2010 onward to show when, under what conditions and among which groups the new usage spread. LLMs have now massively expanded what research can do in this field and others, and I want to be part of that expansion.',
 };
 
 export const sections = [
@@ -17,16 +17,16 @@ export const sections = [
     title: { de: 'Artikel & Papers', en: 'Articles & papers' },
     items: [
       {
+        year: { de: 'eingereicht', en: 'submitted' },
+        title: 'Who is the Pronoun Pro? Comparing LLMs and Humans at Number-Disambiguation of they',
+        detail: { de: 'Preprint auf OSF', en: 'Preprint on OSF' },
+        url: 'https://doi.org/10.17605/OSF.IO/2J4KE',
+      },
+      {
         year: '2026',
         title: 'Singular they Becoming even more Singular: The themselves/themself Variation on Reddit',
         detail: 'Applied Corpus Linguistics 6(2), 100199',
         url: 'https://doi.org/10.1016/j.acorp.2026.100199',
-      },
-      {
-        year: '2027',
-        title: 'Who is the Pronoun Pro? Comparing LLMs and Humans at Number-Disambiguation of they',
-        detail: { de: 'Zur Publikation angenommen (2027); Preprint auf OSF', en: 'Accepted for publication (2027); preprint on OSF' },
-        url: 'https://doi.org/10.17605/OSF.IO/2J4KE',
       },
       {
         year: '2025',
@@ -43,8 +43,8 @@ export const sections = [
       {
         year: '2025',
         title: 'Reddit FlairShare',
-        detail: { de: 'Datensatz, OSF; gespiegelt unter doi.org/10.48656/4xzy-gc80', en: 'Dataset, OSF; mirrored at doi.org/10.48656/4xzy-gc80' },
-        url: 'https://doi.org/10.17605/OSF.IO/S36PQ',
+        detail: { de: 'Datensatz auf dem Schweizer LaRS-Repositorium; auch auf OSF', en: 'Dataset on the Swiss LaRS repository; also on OSF' },
+        url: 'https://doi.org/10.48656/4xzy-gc80',
       },
       {
         year: '2022',
@@ -123,19 +123,6 @@ export const sections = [
         detail: { de: 'Verein Cinépassion, Zürich', en: 'Cinépassion association, Zurich' },
         url: 'https://www.cinepassion.ch/de/',
       },
-    ],
-  },
-  {
-    id: 'literarisches',
-    initial: 'L',
-    title: { de: 'Literarisches', en: 'Literary pieces' },
-    items: [
-      { year: '2024', title: 'Der Unbekannte aus der Plattenstrasse', detail: { de: 'Kurzgeschichte', en: 'Short story' }, post: 'plattenstrasse' },
-      { year: '2023', title: '«Itsumo Nando Demo» (Immer und immer wieder)', detail: { de: 'Liedübersetzung', en: 'Song translation' }, post: 'immer-und-immer-wieder' },
-      { year: '2021', title: 'Señores Pasajeros', detail: { de: 'Gedicht', en: 'Poem' }, post: 'senores-pasajeros' },
-      { year: '2019', title: '«Funeral Blues» von W. H. Auden', detail: { de: 'Gedichtübersetzung', en: 'Poem translation' }, post: 'bestattungsblues' },
-      { year: '2019', title: 'Nachsinnen', detail: { de: 'Gedicht', en: 'Poem' }, post: 'nachsinnen' },
-      { year: '2015', title: 'Wort', detail: { de: 'Gedicht', en: 'Poem' }, post: 'wort' },
     ],
   },
 ];

@@ -210,8 +210,8 @@ export const sections = [
       {
         when: '2025–2026',
         what: { de: 'Offener Datensatz Reddit FlairShare', en: 'Open dataset Reddit FlairShare' },
-        detail: { de: 'Auf OSF und gespiegelt auf einem Schweizer Repositorium', en: 'On OSF and mirrored on a Swiss repository' },
-        url: 'https://doi.org/10.17605/OSF.IO/S36PQ',
+        detail: { de: 'Auf OSF und gespiegelt auf dem Schweizer LaRS-Repositorium', en: 'On OSF and mirrored on the Swiss LaRS repository' },
+        url: 'https://doi.org/10.48656/4xzy-gc80',
       },
       {
         when: '2026',
@@ -224,8 +224,12 @@ export const sections = [
         post: 'llms',
       },
       {
-        when: { de: 'seit 2024', en: 'since 2024' },
+        when: '2024–2027',
         what: { de: 'Mitglied der KI-Taskforce des Englischen Seminars', en: 'Member of the English Department’s AI task force' },
+        detail: {
+          de: 'Die ersten Jahre der KI-Transformation in der Lehre begleitet und dabei die Belegschaft massgeblich mit Know-how zu KI unterstützt. Interne Guidelines wurden von mir verfasst, bzw. existierende erweitert.',
+          en: 'Accompanied the first years of the AI transformation in teaching and gave the staff substantial support with AI know-how. I wrote internal guidelines and extended existing ones.',
+        },
       },
     ],
   },
