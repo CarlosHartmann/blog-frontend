@@ -5,8 +5,8 @@
 // nationalities and private (view-only) OSF links.
 
 export const profile = {
-  de: 'Computerlinguist und Korpuslinguist. Ich doktoriere an der Universität Zürich zum singularen «they» und untersuche, wie gut Large Language Models bei der sprachwissenschaftlichen Annotation helfen können.',
-  en: 'Computational and corpus linguist. I am doing a PhD at the University of Zurich on singular “they” and study how well large language models can help with linguistic annotation.',
+  de: 'Computerlinguist und Korpuslinguist mit Interesse an Data Management/Stewardship. Ich doktoriere an der Universität Zürich zum singularen «they» und setze LLMs für linguistische Zwecke ein, aktuell besonders mit agentic workflows.',
+  en: 'Computational and corpus linguist with an interest in data management and stewardship. I am doing a PhD at the University of Zurich on singular “they” and use LLMs for linguistic purposes, at present mostly with agentic workflows.',
 };
 
 export const links = [
