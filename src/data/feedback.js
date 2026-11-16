@@ -28,6 +28,11 @@ export const sources = {
     de: `Seminargruppe «Introduction to English Linguistics», Universität Zürich · ${evaluation.de}`,
     en: `Seminar group “Introduction to English Linguistics”, University of Zurich · ${evaluation.en}`,
   },
+  email26: {
+    tag: { de: 'FS 2026', en: 'Spring 2026' },
+    de: 'Seminargruppe «Introduction to English Linguistics», Universität Zürich · E-Mail, anonymisiert',
+    en: 'Seminar group “Introduction to English Linguistics”, University of Zurich · email, anonymized',
+  },
   gender24: {
     tag: { de: 'HS 2024', en: 'Fall 2024' },
     de: `BA-Seminar «Gender and Sexuality in English», Universität Zürich · ${evaluation.de}`,
@@ -158,6 +163,12 @@ export const sections = [
     id: 'betreuung',
     title: { de: 'Betreuung & Send-off-Mails', en: 'Support & send-off emails' },
     quotes: [
+      {
+        // From a private email, not an evaluation: cut to the praise, no name.
+        src: 'email26',
+        lang: 'en',
+        text: "[…] I really liked the atmosphere in class […]. What I loved most, however, were the send-off emails on OLAT. Those really made my day and helped me to stay up to date. Furthermore, I’d like to mention that your hard work in all the little OLAT subfolders really make it clear that you also enjoy teaching, as you provided us with lots and lots of information that were ( a bit overwhelming but definitely) very much appreciated. […] I simply wanted to say thank you […] for being an inspiring and cheerful instructor!",
+      },
       {
         src: 'gender24',
         lang: 'en',

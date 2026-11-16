@@ -21,11 +21,18 @@ export const courses = [
   { when: { de: 'HS 2024', en: 'Fall 2024' }, what: course.gender },
 ];
 
-// What a student wrote about the send-offs (also on the Feedback page).
-export const voice = {
-  text: 'What I find extremely helpful are the e-mails we receive after every session mentioning again a few important points and answering questions in a written and extensive manner so that we can be sure to have all informaiton',
-  source: { de: 'Kursevaluation, HS 2024, anonym', en: 'Course evaluation, fall 2024, anonymous' },
-};
+// What students wrote about the send-offs (both are also on the Feedback page).
+// The first comes from a private email: it is cut to the praise and unnamed.
+export const voices = [
+  {
+    text: "[…] I really liked the atmosphere in class […]. What I loved most, however, were the send-off emails on OLAT. Those really made my day and helped me to stay up to date. Furthermore, I’d like to mention that your hard work in all the little OLAT subfolders really make it clear that you also enjoy teaching, as you provided us with lots and lots of information that were ( a bit overwhelming but definitely) very much appreciated. […] I simply wanted to say thank you […] for being an inspiring and cheerful instructor!",
+    source: { de: 'E-Mail aus einer Seminargruppe, März 2026, anonymisiert', en: 'Email from a seminar group, March 2026, anonymized' },
+  },
+  {
+    text: 'What I find extremely helpful are the e-mails we receive after every session mentioning again a few important points and answering questions in a written and extensive manner so that we can be sure to have all informaiton',
+    source: { de: 'Kursevaluation, HS 2024, anonym', en: 'Course evaluation, fall 2024, anonymous' },
+  },
+];
 
 export const sections = [
   {

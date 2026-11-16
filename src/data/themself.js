@@ -1,4 +1,4 @@
-// "themself or themselves?": an explainer built on the article
+// "themselves or themself?": an explainer built on the article
 // "Singular they Becoming even more Singular: The themselves/themself
 // Variation on Reddit" (Applied Corpus Linguistics 6(2), 2026).
 //
@@ -34,7 +34,7 @@ export const quotes = {
 export const copy = {
   de: {
     kicker: 'Aus meiner Forschung',
-    title: '<em>themself</em> oder <em>themselves</em>?',
+    title: '<em>themselves</em> oder <em>themself</em>?',
     lede: 'Wer mit <em>they</em> von einer einzelnen Person spricht, braucht früher oder später das Reflexivpronomen dazu. Die Grammatiken kennen nur <em>themselves</em>. Auf Reddit schreiben manche <em>themself</em>. Wer das tut, wann und wie oft, habe ich in einem Artikel untersucht.',
     groups: ['Leute, die ihre Pronomen angeben', 'Ihre Nachbarschaft in denselben Communities', 'Das übrige Reddit'],
     first: 'Zuerst du',
@@ -98,7 +98,7 @@ export const copy = {
   },
   en: {
     kicker: 'From my research',
-    title: '<em>themself</em> or <em>themselves</em>?',
+    title: '<em>themselves</em> or <em>themself</em>?',
     lede: 'Anyone who uses <em>they</em> for a single person will sooner or later need the reflexive that goes with it. The grammar books only know <em>themselves</em>. On Reddit, some people write <em>themself</em>. I studied who does, when, and how often.',
     groups: ['People who declare their pronouns', 'Their neighbours in the same communities', 'The rest of Reddit'],
     first: 'You first',

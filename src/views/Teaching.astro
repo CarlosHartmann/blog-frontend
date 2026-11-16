@@ -2,7 +2,7 @@
 // Teaching page: excerpts from the send-off emails. Content in src/data/teaching.js.
 import Base from '../layouts/Base.astro';
 import { href } from '../lib/i18n.js';
-import { courses, voice, sections, signOffs, pictures, copy, pick } from '../data/teaching.js';
+import { courses, voices, sections, signOffs, pictures, copy, pick } from '../data/teaching.js';
 
 const { lang } = Astro.props;
 const c = copy[lang];
@@ -31,12 +31,22 @@ const nav = [
         <p class="lede">{c.lede}</p>
         <div class="rule" aria-hidden="true"></div>
 
-        <figure class="explainer-voice">
-          <blockquote lang="en">{voice.text}</blockquote>
-          <figcaption>
-            {pick(voice.source, lang)} · <a href={href(lang, '/feedback/')}>{c.voiceLink}</a>
-          </figcaption>
-        </figure>
+        {
+          voices.map((voice, index) => (
+            <figure class="explainer-voice">
+              <blockquote lang="en">{voice.text}</blockquote>
+              <figcaption>
+                {pick(voice.source, lang)}
+                {index === voices.length - 1 && (
+                  <>
+                    {' · '}
+                    <a href={href(lang, '/feedback/')}>{c.voiceLink}</a>
+                  </>
+                )}
+              </figcaption>
+            </figure>
+          ))
+        }
 
         <div class="entries sheet sendoffs">
           {
