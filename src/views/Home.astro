@@ -27,7 +27,7 @@ const banners = await Promise.all(
     <img class="banner" id="banner" alt="" fetchpriority="high" />
     <noscript><img class="banner" src={banners[0].src} alt={banners[0].alt} /></noscript>
     <div class="home-box">
-      <h1 class="wordmark" style="margin: 0; font-weight: 400">smog.sh</h1>
+      <h1 class="wordmark" style="margin: 0">smog.sh<span class="cursor" aria-hidden="true"></span></h1>
       <Nav lang={lang} path="/" current="home" />
     </div>
   </main>

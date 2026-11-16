@@ -120,11 +120,24 @@ a:hover {
   border-bottom: 1px solid var(--ground-line);
 }
 
+/* The wordmark is set like a command: smog.sh is, after all, a shell script. */
 .wordmark {
-  font-family: var(--black);
-  font-size: 34px;
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
   line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
   text-decoration: none;
+}
+
+.wordmark .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  margin-left: 0.12em;
+  vertical-align: -0.08em;
+  background: var(--led);
 }
 
 .site-nav {
@@ -613,23 +626,16 @@ a:hover {
 /* ---------- publications ---------- */
 
 .entries h2 {
-  display: flex;
-  align-items: baseline;
-  margin: 40px 0 8px;
+  margin: 40px 0 10px;
   color: var(--rubric);
-  font-size: 1rem;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  line-height: 1.3;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.entries h2 .initial {
-  margin-right: 3px;
-  font-family: var(--black);
-  font-size: 2.1em;
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: none;
+.entries h2 .hash {
+  margin-right: 0.6ch;
 }
 
 .entries ul {
@@ -813,8 +819,8 @@ a:hover {
 }
 
 .home-box .wordmark {
-  font-size: 56px;
-  line-height: 1.1;
+  font-size: 38px;
+  line-height: 1.2;
 }
 
 .home-box .site-nav {
@@ -949,7 +955,7 @@ a:hover {
   }
 
   .home-box .wordmark {
-    font-size: 44px;
+    font-size: 32px;
   }
 
   .home-box .site-nav {
