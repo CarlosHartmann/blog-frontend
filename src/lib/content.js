@@ -64,6 +64,18 @@ function buildFigures(root) {
   }
 }
 
+// The editor sometimes leaves a figure inside an otherwise empty <div>. The
+// steps below look at top-level blocks, so such a wrapper would hide the
+// figure from them (a trailing image would stay at the foot of the post).
+function unwrapFigureWrappers(root) {
+  const isWrapper = (d) =>
+    Object.keys(d.attributes).length === 0 &&
+    d.querySelector('figure') &&
+    d.childNodes.every((n) => (n.nodeType === 1 ? n.tagName === 'FIGURE' : !squash(n.text)));
+  let wrapper;
+  while ((wrapper = root.querySelectorAll('div').find(isWrapper))) unwrap(wrapper);
+}
+
 // Authors separate stanzas and sections with empty paragraphs. Keep one blank
 // line where they meant one, drop the ones that only pad headings or the ends.
 function normaliseGaps(root) {
@@ -174,6 +186,7 @@ export function prepareContent(html = '', titleText = '') {
   if (first && ['P', 'DIV', 'H1', 'H2'].includes(first.tagName) && squash(first.text) === squash(titleText)) first.remove();
 
   buildFigures(root);
+  unwrapFigureWrappers(root);
   buildEmbeds(root);
   normaliseGaps(root);
   hoistTrailingFigures(root);

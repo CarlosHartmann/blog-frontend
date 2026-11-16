@@ -22,7 +22,7 @@ const t = ui[lang];
         <p class="lede">{t.pubsIntro}</p>
         <div class="rule" aria-hidden="true"></div>
         <div class="prose">
-          <p class="initiale">{research[lang]}</p>
+          <p class="initiale" set:html={research[lang]} />
         </div>
         <div class="entries">
           {
@@ -37,8 +37,8 @@ const t = ui[lang];
                       return (
                         <li>
                           <span class="year">{pick(item.year, lang)}</span>
-                          <span class="what">{link ? <a href={link}>{pick(item.title, lang)}</a> : pick(item.title, lang)}</span>
-                          <span class="detail">{pick(item.detail, lang)}</span>
+                          <span class="what">{link ? <a href={link} set:html={pick(item.title, lang)} /> : <Fragment set:html={pick(item.title, lang)} />}</span>
+                          <span class="detail" set:html={pick(item.detail, lang)} />
                         </li>
                       );
                     })}

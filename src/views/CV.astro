@@ -7,7 +7,7 @@ const { lang } = Astro.props;
 const t = ui[lang];
 ---
 
-<Base lang={lang} path="/cv/" title={t.cvTitle} description={profile[lang]} current="cv">
+<Base lang={lang} path="/cv/" title={t.cvTitle} description={profile[lang].replace(/<[^>]+>/g, '')} current="cv">
   <main id="inhalt" class="page">
     <div class="leaf-grid">
       <aside class="side">
@@ -19,7 +19,7 @@ const t = ui[lang];
       <section class="paper">
         <p class="kicker mono">{t.cvKicker}</p>
         <h1 class="title">Carlos Hartmann</h1>
-        <p class="lede">{profile[lang]}</p>
+        <p class="lede" set:html={profile[lang]} />
         <p class="cv-links mono">
           {links.map((link) => <a href={link.url}>{link.label}</a>)}
           <a href={href(lang, '/publications/')}>{t.nav.publications}</a>
@@ -33,15 +33,15 @@ const t = ui[lang];
               return (
                 <>
                   <h2 id={section.id}><span class="hash" aria-hidden="true">#</span>{title}</h2>
-                  {section.note && <p class="cv-note">{pick(section.note, lang)}</p>}
+                  {section.note && <p class="cv-note" set:html={pick(section.note, lang)} />}
                   <ul>
                     {section.items.map((item) => {
                       const link = item.post ? href(lang, `/${item.post}/`) : item.url;
                       return (
                         <li>
                           <span class="year">{pick(item.when, lang)}</span>
-                          <span class="what">{link ? <a href={link}>{pick(item.what, lang)}</a> : pick(item.what, lang)}</span>
-                          {item.detail && <span class="detail">{pick(item.detail, lang)}</span>}
+                          <span class="what">{link ? <a href={link} set:html={pick(item.what, lang)} /> : <Fragment set:html={pick(item.what, lang)} />}</span>
+                          {item.detail && <span class="detail" set:html={pick(item.detail, lang)} />}
                         </li>
                       );
                     })}

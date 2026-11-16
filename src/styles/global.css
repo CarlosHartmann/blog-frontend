@@ -277,6 +277,13 @@ a:hover {
   font-style: italic;
 }
 
+/* A cited word inside italic text is set upright, so it still stands out. */
+.lede em,
+.entries .detail em,
+.cv-note em {
+  font-style: normal;
+}
+
 .rule {
   height: 5px;
   margin: 28px 0 32px;

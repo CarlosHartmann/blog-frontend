@@ -5,8 +5,8 @@
 // nationalities and private (view-only) OSF links.
 
 export const profile = {
-  de: 'Computerlinguist und Korpuslinguist mit Interesse an Data Management/Stewardship. Ich doktoriere an der Universität Zürich zum singularen «they» und setze LLMs für linguistische Zwecke ein, aktuell besonders mit agentic workflows.',
-  en: 'Computational and corpus linguist with an interest in data management and stewardship. I am doing a PhD at the University of Zurich on singular “they” and use LLMs for linguistic purposes, at present mostly with agentic workflows.',
+  de: 'Computerlinguist und Korpuslinguist mit Interesse an Data Management/Stewardship. Ich doktoriere an der Universität Zürich zum singularen <em>they</em> und setze LLMs für linguistische Zwecke ein, aktuell besonders mit agentic workflows. Ich habe eine Leidenschaft fürs Vortragen, Dozieren und Digitalisieren.',
+  en: 'Computational and corpus linguist with an interest in data management and stewardship. I am doing a PhD at the University of Zurich on singular <em>they</em> and use LLMs for linguistic purposes, at present mostly with agentic workflows. My passions are public speaking, lecturing, and digitizing of all kinds.',
 };
 
 export const links = [
@@ -32,8 +32,8 @@ export const sections = [
           en: 'Cumulative PhD in computational and corpus linguistics, University of Zurich',
         },
         detail: {
-          de: 'Zum singularen «they» und verwandten Phänomenen, bei Prof. Dr. Marianne Hundt. Abschluss voraussichtlich Herbst 2027',
-          en: 'On singular “they” and related phenomena, supervised by Prof. Dr. Marianne Hundt. Expected graduation: autumn 2027',
+          de: 'Zum singularen <em>they</em> und verwandten Phänomenen, bei Prof. Dr. Marianne Hundt. Abschluss voraussichtlich Herbst 2027',
+          en: 'On singular <em>they</em> and related phenomena, supervised by Prof. Dr. Marianne Hundt. Expected graduation: autumn 2027',
         },
       },
       {
@@ -43,8 +43,8 @@ export const sections = [
           en: 'MA in Linguistics (single-subject master) with a focus on computational linguistics, University of Zurich',
         },
         detail: {
-          de: 'Masterarbeit: «Shifting Pronouns and Disruptive Technology: Studying Singular ‘They’ with GPT-3», ausgezeichnet mit dem Semesterpreis',
-          en: 'Thesis: “Shifting Pronouns and Disruptive Technology: Studying Singular ‘They’ with GPT-3”, awarded the Semesterpreis',
+          de: 'Masterarbeit: «Shifting Pronouns and Disruptive Technology: Studying Singular <em>They</em> with GPT-3», ausgezeichnet mit dem Semesterpreis',
+          en: 'Thesis: “Shifting Pronouns and Disruptive Technology: Studying Singular <em>They</em> with GPT-3”, awarded the Semesterpreis',
         },
         url: 'https://doi.org/10.5167/uzh-231828',
       },
@@ -215,7 +215,7 @@ export const sections = [
       },
       {
         when: '2026',
-        what: { de: 'Replikationsdaten zu den Artikeln über «themself» und über den Vergleich von LLMs und Menschen', en: 'Replication data for the articles on “themself” and on the comparison of LLMs and humans' },
+        what: { de: 'Replikationsdaten zu den Artikeln über <em>themself</em> und über den Vergleich von LLMs und Menschen', en: 'Replication data for the articles on <em>themself</em> and on the comparison of LLMs and humans' },
       },
       {
         when: '2026',
