@@ -2,20 +2,15 @@
 // in `kicker` when you do.
 //
 // The film list comes from a Letterboxd export (Letterboxd has no API):
-// films released this year with a rating of 4 stars or more, plus re-releases
+// films released this year with a rating of 4.5 stars or more, plus re-releases
 // that count as new. Links are the short links from the export.
 
 const stars = (rating) => '★'.repeat(Math.floor(rating)) + (rating % 1 ? '½' : '');
 
 const films = [
-  { title: 'The Devils', rating: 5, url: 'https://boxd.it/1inI', de: 'Ken Russell, 1971 · der Director’s Cut ist 2026 erschienen und ein merklich anderer Film', en: 'Ken Russell, 1971 · the director’s cut came out in 2026 and is a meaningfully different film' },
+  { title: 'The Devils', rating: 5, url: 'https://boxd.it/1inI', de: 'Ken Russell, 1971 · der Director’s Cut ist 2026 erschienen und ein merklich verbesserter Film, und aktueller denn je.', en: 'Ken Russell, 1971 · the director’s cut came out in 2026 and is a markedly improved film, and more topical than ever.' },
   { title: 'Teenage Sex and Death at Camp Miasma', rating: 4.5, url: 'https://boxd.it/L9GS' },
   { title: 'The Odyssey', rating: 4.5, url: 'https://boxd.it/QFQU' },
-  { title: 'Backrooms', rating: 4, url: 'https://boxd.it/EY6W' },
-  { title: 'Capturing Bigfoot', rating: 4, url: 'https://boxd.it/10Mw8' },
-  { title: 'Leviticus', rating: 4, url: 'https://boxd.it/YjUw' },
-  { title: 'National Theatre Live: The Misanthrope', rating: 4, url: 'https://boxd.it/13ioY' },
-  { title: 'The Drama', rating: 4, url: 'https://boxd.it/OA2w' },
 ];
 
 const filmItems = (lang) => films.map((film) => ({ when: stars(film.rating), what: film.title, url: film.url, detail: film[lang], lang: 'en' }));
@@ -25,12 +20,12 @@ export const now = {
   current: 'now',
   de: {
     kicker: 'Stand: November 2026',
-    title: 'Jetzt & demnächst',
+    title: 'Aktuell & demnächst',
     lede: 'Woran ich gerade arbeite, was ansteht und welche Filme mich dieses Jahr begeistert haben.',
     sections: [
       {
         id: 'jetzt',
-        title: 'Jetzt',
+        title: 'Aktuell',
         items: [
           { when: 'bis April 2027', what: 'Forschungsaufenthalt an der University of Birmingham', detail: 'Seit September 2026, mit Stipendium' },
           { when: 'laufend', what: 'Ich lerne Ukrainisch' },
@@ -46,7 +41,7 @@ export const now = {
       {
         id: 'filme',
         title: 'Filme des Jahres 2026',
-        text: ['Neue Filme, die ich dieses Jahr geliebt (ab ★★★★½) oder sehr gemocht (★★★★) habe, nach meiner Wertung auf <a href="https://letterboxd.com/smogshaik/">Letterboxd</a>.'],
+        text: ['Neue Filme, die ich dieses Jahr geliebt habe (ab ★★★★½), nach meiner Wertung auf <a href="https://letterboxd.com/smogshaik/">Letterboxd</a>.'],
         items: filmItems('de'),
       },
     ],
@@ -74,7 +69,7 @@ export const now = {
       {
         id: 'filme',
         title: 'Films of 2026',
-        text: ['New films I loved (★★★★½ and up) or liked a lot (★★★★) this year, by my ratings on <a href="https://letterboxd.com/smogshaik/">Letterboxd</a>.'],
+        text: ['New films I loved this year (★★★★½ and up), by my ratings on <a href="https://letterboxd.com/smogshaik/">Letterboxd</a>.'],
         items: filmItems('en'),
       },
     ],
