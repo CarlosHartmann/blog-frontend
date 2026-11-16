@@ -43,7 +43,7 @@ const canonical = SITE + href(canonicalLang, path);
     <link rel="alternate" hreflang="de" href={SITE + href('de', path)} />
     <link rel="alternate" hreflang="en" href={SITE + href('en', path)} />
     <link rel="alternate" hreflang="x-default" href={SITE + href('de', path)} />
-    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href={href(lang, '/rss.xml')} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

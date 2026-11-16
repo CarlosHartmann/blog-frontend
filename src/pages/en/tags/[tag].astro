@@ -1,0 +1,10 @@
+---
+import Blog from '../../../views/Blog.astro';
+import { getTags } from '../../../lib/wp.js';
+
+export async function getStaticPaths() {
+  return (await getTags()).map((tag) => ({ params: { tag: tag.slug } }));
+}
+---
+
+<Blog lang="en" tag={Astro.params.tag} />

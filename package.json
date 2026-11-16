@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "generate": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "cv-pdf": "sh scripts/cv-pdf.sh"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

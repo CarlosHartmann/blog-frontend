@@ -37,7 +37,14 @@ function featuredImage(raw) {
   };
 }
 
+// Tags are WordPress tags: assign them on a post's edit screen.
+async function loadTagNames() {
+  const { data } = await request('wp/v2/tags?per_page=100&_fields=id,name,slug');
+  return new Map(data.map((tag) => [tag.id, { slug: tag.slug, name: plainText(tag.name) }]));
+}
+
 async function loadPosts() {
+  const tagNames = await loadTagNames();
   const raw = [];
   for (let page = 1; ; page++) {
     const { data, headers } = await request(`wp/v2/posts?_embed=wp:featuredmedia&acf_format=standard&per_page=50&page=${page}`);
@@ -63,6 +70,7 @@ async function loadPosts() {
       title: post.title.rendered,
       titleText,
       image: featuredImage(post),
+      tags: (post.tags || []).map((id) => tagNames.get(id)).filter(Boolean),
       ...prepareContent(post.content.rendered, titleText),
       en: enHtml ? { title: escapeHtml(enTitle), titleText: enTitle, ...prepareContent(enHtml, enTitle) } : null,
     };
@@ -73,6 +81,19 @@ let posts;
 export function getPosts() {
   posts ??= loadPosts();
   return posts;
+}
+
+// Every tag in use, the most used first.
+export async function getTags() {
+  const counts = new Map();
+  for (const post of await getPosts()) {
+    for (const tag of post.tags) {
+      const entry = counts.get(tag.slug) || { ...tag, count: 0 };
+      entry.count += 1;
+      counts.set(tag.slug, entry);
+    }
+  }
+  return [...counts.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'de'));
 }
 
 const pages = new Map();

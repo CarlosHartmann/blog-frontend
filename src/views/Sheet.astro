@@ -1,0 +1,74 @@
+---
+// A plain page made of sections: used by Now, Speaking and Colophon.
+// The content comes from a data file as { path, de: {...}, en: {...} } with
+//   kicker, title, lede, sections: [{ id, title, text: [html], items: [...] }]
+// An item has `when` (left column), `what`, and optionally `detail`, `url`
+// (an address on this site starts with "/" and gets the language prefix),
+// `swatch` (a colour shown in the left column) and `lang` (language of the
+// item's text when it differs from the page).
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+
+const { lang, page } = Astro.props;
+const t = ui[lang];
+const content = page[lang];
+const link = (url) => (url && url.startsWith('/') ? href(lang, url) : url);
+const plain = (html) => html.replace(/<[^>]+>/g, '');
+---
+
+<Base lang={lang} path={page.path} title={plain(content.title)} description={plain(content.lede)} current={page.current}>
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <nav aria-label={t.pubsSections}>
+          {content.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{content.kicker}</p>
+        <h1 class="title" set:html={content.title} />
+        <p class="lede" set:html={content.lede} />
+        {
+          content.cta && (
+            <p class="sheet-cta">
+              <a class="button" href={link(content.cta.url)}>
+                {content.cta.label}
+              </a>
+            </p>
+          )
+        }
+        <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
+        <div class="entries sheet">
+          {
+            content.sections.map((section) => (
+              <>
+                <h2 id={section.id}>
+                  <span class="hash" aria-hidden="true">#</span>
+                  {section.title}
+                </h2>
+                {(section.text || []).map((paragraph) => <p class="sheet-text" set:html={paragraph} />)}
+                {section.items && (
+                  <ul>
+                    {section.items.map((item) => (
+                      <li lang={item.lang}>
+                        <span class="year">
+                          {item.swatch && <span class="swatch" style={`background:${item.swatch}`} aria-hidden="true" />}
+                          {item.when}
+                        </span>
+                        <span class="what">
+                          {item.url ? <a href={link(item.url)} set:html={item.what} /> : <Fragment set:html={item.what} />}
+                        </span>
+                        {item.detail && <span class="detail" set:html={item.detail} />}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Base>

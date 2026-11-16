@@ -705,6 +705,308 @@ a:hover {
   hyphens: manual;
 }
 
+/* ---------- plain pages (now, speaking, colophon) ---------- */
+
+.sheet-cta {
+  margin: 22px 0 0;
+}
+
+.sheet-cta .button {
+  display: inline-block;
+}
+
+.sheet-text {
+  margin: 0 0 12px;
+  max-width: 36em;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.sheet-text a {
+  color: var(--rubric);
+}
+
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  vertical-align: -1px;
+  border: 1px solid var(--ink-dim);
+}
+
+/* ---------- quiz ---------- */
+
+.quiz-how {
+  margin: 0 0 8px;
+}
+
+.quiz-how p {
+  margin: 0 0 12px;
+}
+
+.quiz-how dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px 20px;
+  margin: 0;
+}
+
+.quiz-how dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+.quiz-how dd {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+.quiz {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quiz-item {
+  padding: 26px 0 28px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.thread-sub {
+  margin: 0;
+  color: var(--rubric);
+}
+
+.thread-line {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--paper-line);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink-dim);
+  overflow-wrap: anywhere;
+}
+
+.thread-line .mono {
+  margin-right: 6px;
+  font-size: 10px;
+}
+
+.thread-target {
+  border-left-color: var(--rubric);
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.thread-target mark {
+  padding: 0 0.2em;
+  color: var(--paper);
+  background: var(--rubric);
+}
+
+.quiz-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.quiz-choices button {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.quiz-choices button:hover:enabled {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.quiz-choices button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.quiz-choices button.answer {
+  opacity: 1;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.quiz-choices button.picked:not(.answer) {
+  opacity: 1;
+  color: var(--rubric);
+  border-color: var(--rubric);
+  text-decoration: line-through;
+}
+
+.quiz-solution {
+  margin: 14px 0 0;
+}
+
+.quiz-solution summary {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+}
+
+.quiz-solution p {
+  margin: 8px 0 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.quiz-item.right .verdict {
+  color: #2f6b3a;
+}
+
+.quiz-item.wrong .verdict {
+  color: var(--rubric);
+}
+
+.quiz-result {
+  padding-top: 8px;
+  border-top: 5px double var(--ink);
+}
+
+.quiz-result h2 {
+  margin: 24px 0 6px;
+  color: var(--rubric);
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.quiz-result h2 .hash {
+  margin-right: 0.6ch;
+}
+
+.quiz-score {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.quiz-score .mono {
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+
+.quiz-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 0;
+}
+
+.quiz-bars > p {
+  margin: 0;
+  color: var(--ink-dim);
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 2px 12px;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.bar span {
+  grid-column: 1 / -1;
+}
+
+.bar i {
+  height: 10px;
+  background: var(--ink);
+}
+
+.bar b {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.bar-you i {
+  background: var(--rubric);
+}
+
+.bar-you b {
+  color: var(--rubric);
+}
+
+.quiz-note {
+  margin: 14px 0 0;
+  max-width: 36em;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+/* ---------- blog tags ---------- */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 8px;
+  margin: 22px 0 0;
+}
+
+.tags a {
+  padding: 5px 10px;
+  border: 1px solid var(--paper-line);
+  text-decoration: none;
+}
+
+.tags a span {
+  color: var(--ink-dim);
+}
+
+.tags a:hover {
+  border-color: var(--rubric);
+}
+
+.tags a[aria-current='page'] {
+  color: var(--paper);
+  background: var(--rubric);
+  border-color: var(--rubric);
+}
+
+.tags a[aria-current='page'] span {
+  color: inherit;
+}
+
 /* ---------- feedback ---------- */
 
 /* The one quote that opens the page, set like a line typed at a prompt. */
@@ -888,6 +1190,12 @@ a:hover {
   font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--on-ground-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
 }
 
 .site-footer .led {
@@ -1089,23 +1397,88 @@ a:hover {
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm;
+  }
+
   .site-header,
   .site-footer,
   .side,
   .preview,
-  .post-nav {
+  .post-nav,
+  .cv-links,
+  .tags,
+  .sheet-cta,
+  .skip {
     display: none;
   }
 
-  html,
-  .paper {
+  html {
+    font-size: 10.5pt;
     background: #fff;
     color: #000;
   }
 
+  body {
+    display: block;
+    min-height: 0;
+  }
+
+  .page,
+  .leaf-grid {
+    display: block;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+  }
+
   .paper {
+    padding: 0;
+    color: #000;
+    background: #fff;
     border: 0;
     outline: 0;
-    padding: 0;
+  }
+
+  .entries h2 {
+    margin-top: 22px;
+    break-after: avoid;
+  }
+
+  .entries li {
+    padding: 7px 0;
+    break-inside: avoid;
+  }
+
+  .cv-note {
+    break-inside: avoid;
+  }
+
+  .entries .year {
+    font-size: 8.5pt;
+    line-height: 1.6;
+  }
+
+  .entries a {
+    text-decoration: none;
+  }
+
+  .print-only {
+    display: block;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block;
+    margin: 6px 0 0;
+    font-family: var(--mono);
+    font-size: 8pt;
+    color: #444;
   }
 }

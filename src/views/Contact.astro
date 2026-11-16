@@ -16,6 +16,9 @@ const t = ui[lang];
         <p class="kicker mono">{t.contactKicker}</p>
         <h1 class="title">{t.contactTitle}</h1>
         <p class="lede">{t.contactIntro}</p>
+        <p class="cv-links mono">
+          <a href={href(lang, '/speaking/')}>{t.contactSpeaking}</a>
+        </p>
         <div class="rule" aria-hidden="true"></div>
         <form class="form" name="contact" method="POST" action={href(lang, '/thankyou/')} data-netlify="true" data-netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact" />

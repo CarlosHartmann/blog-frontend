@@ -1,0 +1,221 @@
+---
+// "Who is they?": a small quiz with texts from the annotation study.
+// Without JavaScript the page still works: every solution sits in a
+// <details> element that can be opened by hand.
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+import { figures, choices, items } from '../data/they-quiz.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const de = lang === 'de';
+const num = (value) => (de ? String(value).replace('.', ',') : String(value));
+const text = de
+  ? {
+      kicker: 'Selbst ausprobieren',
+      title: 'Wer ist <em>they</em>?',
+      lede: `Das englische <em>they</em> kann mehrere meinen, irgendwen oder eine ganz bestimmte Person. Für meine Studie haben ${figures.humans} Menschen und über 40 LLM-Konfigurationen ${figures.texts} echte Reddit-Kommentare danach sortiert. Hier sind zehn davon, bei denen erst der Zusammenhang entscheidet.`,
+      how: 'So geht es',
+      howText: 'Lies den Thread, dann den Kommentar mit dem markierten Pronomen. Worauf bezieht es sich?',
+      post: 'Beitrag',
+      reply: 'Antwort',
+      comment: 'Kommentar',
+      solution: 'Auflösung',
+      right: 'Richtig.',
+      wrong: 'Nicht ganz.',
+      itIs: 'Es ist',
+      score: 'Dein Ergebnis',
+      of: 'von',
+      answered: 'beantwortet',
+      compare: 'Zum Vergleich: die Studie',
+      you: 'Du',
+      best: 'Bestes Sprachmodell',
+      majority: 'Mehrheitsentscheid der Menschen',
+      topHalf: 'Durchschnitt der besseren Hälfte der Menschen',
+      caveat: `Die Werte der Studie gelten für alle ${figures.texts} Texte. Diese zehn sind eine kleine Auswahl kontextabhängiger Fälle, dein Ergebnis ist also nur ein Fingerzeig.`,
+      paper: 'Zum Artikel (Preprint auf arXiv)',
+      source: 'Die Texte sind Reddit-Kommentare aus dem Datensatz der Studie, unverändert bis auf Kürzungen […]. Benutzernamen sind weggelassen.',
+      again: 'Nochmals',
+    }
+  : {
+      kicker: 'Try it yourself',
+      title: 'Who is <em>they</em>?',
+      lede: `English <em>they</em> can mean several people, anyone, or one very specific person. For my study, ${figures.humans} humans and more than 40 LLM configurations sorted ${figures.texts} real Reddit comments accordingly. Here are ten of them where only the context decides.`,
+      how: 'How it works',
+      howText: 'Read the thread, then the comment with the highlighted pronoun. What does it refer to?',
+      post: 'Post',
+      reply: 'Reply',
+      comment: 'Comment',
+      solution: 'Solution',
+      right: 'Correct.',
+      wrong: 'Not quite.',
+      itIs: 'It is',
+      score: 'Your result',
+      of: 'of',
+      answered: 'answered',
+      compare: 'For comparison: the study',
+      you: 'You',
+      best: 'Best language model',
+      majority: 'Majority vote of the humans',
+      topHalf: 'Mean of the better half of the humans',
+      caveat: `The study's figures cover all ${figures.texts} texts. These ten are a small selection of context-dependent cases, so your result is only a hint.`,
+      paper: 'Read the article (preprint on arXiv)',
+      source: 'The texts are Reddit comments from the study’s dataset, unchanged except for cuts […]. User names are left out.',
+      again: 'Start over',
+    };
+const label = (key) => choices[key][lang];
+const hint = (key) => choices[key][de ? 'hintDe' : 'hintEn'];
+const order = ['plural', 'generic', 'singular'];
+---
+
+<Base lang={lang} path="/they/" title={text.title.replace(/<[^>]+>/g, '')} description={text.lede.replace(/<[^>]+>/g, '')} current="publications">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <a class="back" href={href(lang, '/publications/')}>← {t.nav.publications}</a>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{text.kicker}</p>
+        <h1 class="title" set:html={text.title} />
+        <p class="lede" set:html={text.lede} />
+        <div class="rule" aria-hidden="true"></div>
+
+        <div class="quiz-how">
+          <p>{text.howText}</p>
+          <dl>
+            {
+              order.map((key) => (
+                <div>
+                  <dt>{label(key)}</dt>
+                  <dd>{hint(key)}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <ol class="quiz" id="quiz" data-right={text.right} data-wrong={text.wrong}>
+          {
+            items.map((item, index) => (
+              <li class="quiz-item" data-answer={item.answer}>
+                <div class="thread" lang="en">
+                  <p class="thread-sub mono">
+                    {index + 1} / {items.length} · {item.sub}
+                  </p>
+                  {item.thread.map((line, depth) => (
+                    <p class="thread-line" style={`margin-left:${Math.min(depth, 3) * 14}px`}>
+                      <span class="mono" lang={lang}>{depth === 0 ? text.post : text.reply}</span> {line}
+                    </p>
+                  ))}
+                  <p class="thread-line thread-target" style={`margin-left:${Math.min(item.thread.length, 3) * 14}px`}>
+                    <span class="mono" lang={lang}>{text.comment}</span> {item.target[0]}<mark>{item.target[1]}</mark>{item.target[2]}
+                  </p>
+                </div>
+                <div class="quiz-choices">
+                  {order.map((key) => (
+                    <button type="button" data-choice={key}>
+                      {label(key)}
+                    </button>
+                  ))}
+                </div>
+                <details class="quiz-solution">
+                  <summary>{text.solution}</summary>
+                  <p>
+                    <strong class="verdict" /> {text.itIs} <strong>{label(item.answer)}</strong> (<span lang="en">{choices[item.answer].term}</span>). <Fragment set:html={item.why[lang]} />
+                  </p>
+                </details>
+              </li>
+            ))
+          }
+        </ol>
+
+        <section class="quiz-result" aria-live="polite">
+          <h2>
+            <span class="hash" aria-hidden="true">#</span>
+            {text.score}
+          </h2>
+          <p class="quiz-score">
+            <span id="quiz-right">0</span> {text.of} {items.length} <span class="mono">(<span id="quiz-done">0</span> {text.answered})</span>
+          </p>
+          <div class="quiz-bars">
+            <p class="mono">{text.compare}</p>
+            <div class="bar bar-you" id="quiz-you" hidden>
+              <span>{text.you}</span>
+              <i style="width:0%" />
+              <b>0 %</b>
+            </div>
+            <div class="bar">
+              <span>{text.best}</span>
+              <i style={`width:${figures.bestModel}%`} />
+              <b>{num(figures.bestModel)} %</b>
+            </div>
+            <div class="bar">
+              <span>{text.majority}</span>
+              <i style={`width:${figures.humanMajority}%`} />
+              <b>{num(figures.humanMajority)} %</b>
+            </div>
+            <div class="bar">
+              <span>{text.topHalf}</span>
+              <i style={`width:${figures.humanTopHalf}%`} />
+              <b>{num(figures.humanTopHalf)} %</b>
+            </div>
+          </div>
+          <p class="quiz-note">{text.caveat}</p>
+          <p class="quiz-note">{text.source}</p>
+          <p class="cv-links mono">
+            <a href={figures.paper}>{text.paper}</a>
+            <a href={href(lang, '/publications/')}>{t.nav.publications}</a>
+            <a href="#quiz" id="quiz-again">{text.again}</a>
+          </p>
+        </section>
+      </section>
+    </div>
+  </main>
+  <script is:inline define:vars={{ total: items.length, decimal: de ? ',' : '.' }}>
+    (() => {
+      const quiz = document.getElementById('quiz');
+      const update = () => {
+        const done = quiz.querySelectorAll('.quiz-item.done');
+        const right = quiz.querySelectorAll('.quiz-item.right').length;
+        document.getElementById('quiz-right').textContent = right;
+        document.getElementById('quiz-done').textContent = done.length;
+        const you = document.getElementById('quiz-you');
+        you.hidden = done.length < total;
+        if (!you.hidden) {
+          const share = Math.round((right / total) * 1000) / 10;
+          you.querySelector('i').style.width = share + '%';
+          you.querySelector('b').textContent = String(share).replace('.', decimal) + ' %';
+        }
+      };
+      quiz.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-choice]');
+        if (!button) return;
+        const item = button.closest('.quiz-item');
+        if (item.classList.contains('done')) return;
+        const ok = button.dataset.choice === item.dataset.answer;
+        item.classList.add('done', ok ? 'right' : 'wrong');
+        button.classList.add('picked');
+        for (const other of item.querySelectorAll('button')) {
+          other.disabled = true;
+          if (other.dataset.choice === item.dataset.answer) other.classList.add('answer');
+        }
+        item.querySelector('.verdict').textContent = ok ? quiz.dataset.right : quiz.dataset.wrong;
+        item.querySelector('details').open = true;
+        update();
+      });
+      document.getElementById('quiz-again').addEventListener('click', () => {
+        for (const item of quiz.querySelectorAll('.quiz-item')) {
+          item.classList.remove('done', 'right', 'wrong');
+          item.querySelector('.verdict').textContent = '';
+          item.querySelector('details').open = false;
+          for (const button of item.querySelectorAll('button')) {
+            button.disabled = false;
+            button.classList.remove('picked', 'answer');
+          }
+        }
+        update();
+      });
+    })();
+  </script>
+</Base>

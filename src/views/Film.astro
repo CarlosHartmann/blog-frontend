@@ -1,0 +1,87 @@
+---
+// Film index: every post about film, grouped by its WordPress tags.
+// "Filmkommentar" and "Filmempfehlung" get their own lists; everything else
+// tagged "Film" follows.
+import Base from '../layouts/Base.astro';
+import { ui, href } from '../lib/i18n.js';
+import { getPosts } from '../lib/wp.js';
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const posts = await getPosts();
+const has = (post, slug) => post.tags.some((tag) => tag.slug === slug);
+const shown = (p) => (lang === 'en' && p.en ? p.en : p);
+
+const commentaries = posts.filter((post) => has(post, 'filmkommentar'));
+const recommendations = posts.filter((post) => has(post, 'filmempfehlung'));
+const other = posts.filter((post) => has(post, 'film') && !has(post, 'filmkommentar') && !has(post, 'filmempfehlung'));
+
+const sections = [
+  { id: 'kommentare', title: t.filmCommentaries, note: t.filmCommentariesNote, posts: commentaries },
+  { id: 'empfehlungen', title: t.filmRecommendations, posts: recommendations },
+  { id: 'weitere', title: t.filmOther, posts: other },
+].filter((section) => section.posts.length);
+---
+
+<Base lang={lang} path="/film/" title={t.filmTitle} description={t.filmIntro} current="blog">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <a class="back" href={href(lang, '/posts/')}>← {t.backToBlog}</a>
+        <nav aria-label={t.pubsSections}>
+          {sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
+          <a href="#anderswo">{t.filmElsewhere}</a>
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{t.filmKicker}</p>
+        <h1 class="title">{t.filmTitle}</h1>
+        <p class="lede">{t.filmIntro}</p>
+        <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
+        <div class="entries">
+          {
+            sections.map((section) => (
+              <>
+                <h2 id={section.id}>
+                  <span class="hash" aria-hidden="true">#</span>
+                  {section.title}
+                </h2>
+                {section.note && <p class="cv-note">{section.note}</p>}
+                <ul>
+                  {section.posts.map((post) => {
+                    const entry = shown(post);
+                    return (
+                      <li lang={entry === post ? 'de' : 'en'}>
+                        <span class="year">{post.date.slice(0, 4)}</span>
+                        <span class="what">
+                          <a href={href(lang, `/${post.slug}/`)} set:html={entry.title} />
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ))
+          }
+          <h2 id="anderswo">
+            <span class="hash" aria-hidden="true">#</span>
+            {t.filmElsewhere}
+          </h2>
+          <ul>
+            <li>
+              <span class="year">Letterboxd</span>
+              <span class="what"><a href="https://letterboxd.com/smogshaik/">{t.filmLetterboxd}</a></span>
+              <span class="detail">{t.filmLetterboxdNote}</span>
+            </li>
+            <li>
+              <span class="year">Cinépassion</span>
+              <span class="what"><a href="https://www.cinepassion.ch/de/">{t.filmCinepassion}</a></span>
+              <span class="detail">{t.filmCinepassionNote}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</Base>

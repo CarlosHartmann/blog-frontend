@@ -20,10 +20,12 @@ const t = ui[lang];
         <p class="kicker mono">{t.cvKicker}</p>
         <h1 class="title">Carlos Hartmann</h1>
         <p class="lede" set:html={profile[lang]} />
+        <p class="print-only">www.smog.sh{href(lang, '/cv/')} · {new Intl.DateTimeFormat(t.locale, { month: 'long', year: 'numeric' }).format(new Date())}</p>
         <p class="cv-links mono">
           {links.map((link) => <a href={link.url}>{link.label}</a>)}
           <a href={href(lang, '/publications/')}>{t.nav.publications}</a>
           <a href={href(lang, '/contact/')}>{t.nav.contact}</a>
+          <a href={`/cv/carlos-hartmann-cv-${lang}.pdf`}>{t.cvPdf}</a>
         </p>
         <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
         <div class="entries">

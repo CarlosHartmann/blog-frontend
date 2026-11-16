@@ -24,6 +24,9 @@ const t = ui[lang];
         <div class="prose">
           <p class="initiale" set:html={research[lang]} />
         </div>
+        <p class="sheet-cta">
+          <a class="button" href={href(lang, '/they/')}>{t.tryIt}</a>
+        </p>
         <div class="entries">
           {
             sections.map((section) => {

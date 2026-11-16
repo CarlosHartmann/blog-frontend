@@ -1,32 +1,51 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ui, href, formatDate } from '../lib/i18n.js';
-import { getPosts } from '../lib/wp.js';
+import { ui, href, formatDate, tagLabel } from '../lib/i18n.js';
+import { getPosts, getTags } from '../lib/wp.js';
 
-const { lang } = Astro.props;
+// `tag` is the slug of a tag: the list then shows only its posts.
+const { lang, tag = '' } = Astro.props;
 const t = ui[lang];
-const posts = await getPosts();
+const all = await getPosts();
+const tags = await getTags();
+const active = tags.find((entry) => entry.slug === tag);
+const posts = active ? all.filter((post) => post.tags.some((entry) => entry.slug === tag)) : all;
+const path = active ? `/tags/${tag}/` : '/posts/';
+const title = active ? `${t.blogTitle}: ${tagLabel(active, lang)}` : t.blogTitle;
 const first = posts.find((p) => p.image);
 // English list: English title and excerpt where a translation exists.
 const shown = (p) => (lang === 'en' && p.en ? p.en : p);
 ---
 
-<Base lang={lang} path="/posts/" title={t.blogTitle} current="blog">
+<Base lang={lang} path={path} title={title} current="blog">
   <main id="inhalt" class="page">
     <div class="leaf-grid">
       <aside class="side">
         <dl>
           <div>
             <dt>{t.blogKicker}</dt>
-            <dd>Nr. 0–{posts.length - 1}</dd>
+            <dd>Nr. 0–{all.length - 1}</dd>
           </div>
         </dl>
+        <nav>
+          <a href={href(lang, '/film/')}>{t.filmIndex}</a>
+        </nav>
       </aside>
 
       <section class="paper">
         <p class="kicker mono">{t.blogKicker}</p>
-        <h1 class="title">{t.blogTitle}</h1>
+        <h1 class="title">{title}</h1>
         <p class="lede">{t.blogIntro}</p>
+        <nav class="tags mono" aria-label={t.blogTags}>
+          <a href={href(lang, '/posts/')} aria-current={active ? undefined : 'page'}>{t.blogAll} <span>{all.length}</span></a>
+          {
+            tags.map((entry) => (
+              <a href={href(lang, `/tags/${entry.slug}/`)} aria-current={entry.slug === tag ? 'page' : undefined}>
+                {tagLabel(entry, lang)} <span>{entry.count}</span>
+              </a>
+            ))
+          }
+        </nav>
         <div class="rule" aria-hidden="true" style="margin-bottom: 0"></div>
         <ol class="register" start="0">
           {
@@ -39,6 +58,7 @@ const shown = (p) => (lang === 'en' && p.en ? p.en : p);
                     <span class="nr" aria-hidden="true">{post.nr}</span>
                     <span class="mono when" lang={lang}>
                       <time datetime={post.date}>{formatDate(post.date, lang)}</time>
+                      {post.tags.length > 0 && ` · ${post.tags.map((item) => tagLabel(item, lang)).join(', ')}`}
                       {entryLang !== lang && ` · ${t.untranslated}`}
                     </span>
                     <h2 set:html={entry.title} />

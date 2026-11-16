@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ui } from '../lib/i18n.js';
+import { ui, href } from '../lib/i18n.js';
 import { getPage } from '../lib/wp.js';
 import { aboutEn } from '../data/about.en.js';
 
@@ -27,6 +27,12 @@ if (lang === 'en') {
       <article class="paper">
         <p class="kicker mono">{t.aboutKicker}</p>
         <h1 class="title">{t.aboutTitle}</h1>
+        <p class="cv-links mono">
+          <a href={href(lang, '/now/')}>{t.footerNow}</a>
+          <a href={href(lang, '/speaking/')}>{t.footerSpeaking}</a>
+          <a href={href(lang, '/cv/')}>{t.nav.cv}</a>
+          <a href={href(lang, '/colophon/')}>{t.footerColophon}</a>
+        </p>
         <div class="rule" aria-hidden="true"></div>
         <div class="prose">
           {lead && <div class="gloss lead" set:html={lead} />}
