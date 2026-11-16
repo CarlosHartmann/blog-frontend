@@ -176,9 +176,25 @@ const tagNamesEn = {
 };
 export const tagLabel = (tag, lang) => (lang === 'en' && tagNamesEn[tag.slug]) || tag.name;
 
-// `path` is always the German path, e.g. '/posts/' or '/llms/'.
+// Four pages have a German address of their own. Everywhere in the code a
+// page is named by its English path ('/about/'); href() turns that into the
+// address for a language. The German page files in src/pages/ carry the
+// German names, and netlify.toml redirects the old German addresses.
+const germanPaths = {
+  '/about/': '/ueber/',
+  '/publications/': '/forschung/',
+  '/contact/': '/kontaktaufnehmen/',
+  '/now/': '/aktuell/',
+};
+
+// `path` is the path as used in the code, e.g. '/posts/', '/llms/' or
+// '/publications/#vortraege'.
 export function href(lang, path) {
-  return lang === 'en' ? `/en${path}` : path;
+  if (lang === 'en') return `/en${path}`;
+  for (const [from, to] of Object.entries(germanPaths)) {
+    if (path === from || path.startsWith(`${from}#`)) return to + path.slice(from.length);
+  }
+  return path;
 }
 
 // WordPress dates are local wall-clock times without a zone ("2026-02-24T12:45:20").

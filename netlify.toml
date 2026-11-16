@@ -8,6 +8,48 @@
   # Astro 7 needs Node 22.23.4 or newer.
   NODE_VERSION = "22.23.4"
 
+# The German pages got German addresses on 16 November 2026. The old ones
+# keep working and lead to the new ones.
+[[redirects]]
+  from = "/about/"
+  to = "/ueber/"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/ueber/"
+  status = 301
+
+[[redirects]]
+  from = "/publications/"
+  to = "/forschung/"
+  status = 301
+
+[[redirects]]
+  from = "/publications"
+  to = "/forschung/"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/kontaktaufnehmen/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/kontaktaufnehmen/"
+  status = 301
+
+[[redirects]]
+  from = "/now/"
+  to = "/aktuell/"
+  status = 301
+
+[[redirects]]
+  from = "/now"
+  to = "/aktuell/"
+  status = 301
+
 # Unknown addresses under /en/ get the English "not found" page.
 [[redirects]]
   from = "/en/*"
