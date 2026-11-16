@@ -41,7 +41,7 @@ export const sections = [
   {
     id: 'daten',
     initial: 'D',
-    title: { de: 'Daten & Abschlussarbeit', en: 'Data & thesis' },
+    title: { de: 'Daten & Masterarbeit', en: 'Data & master’s thesis' },
     items: [
       {
         year: '2025',
