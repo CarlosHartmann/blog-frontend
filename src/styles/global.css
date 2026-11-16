@@ -158,6 +158,47 @@ a:hover {
   border-bottom-color: var(--gold);
 }
 
+/* Landing page: an entry opens its sub-pages under the pointer or the
+   keyboard focus. Touch screens have neither, so there the entry simply
+   leads to its section, where the second row shows the same links. */
+.nav-item {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-sub {
+  display: none;
+}
+
+@media (hover: hover) and (min-width: 701px) {
+  .nav-item:hover .nav-sub,
+  .nav-item:focus-within .nav-sub {
+    display: flex;
+  }
+
+  .nav-sub {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 5;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 18px 8px;
+    background: var(--ground);
+    border: 1px solid var(--leaf-gold);
+  }
+
+  .site-nav .nav-sub a {
+    padding: 9px 0;
+    white-space: nowrap;
+  }
+
+  .site-nav .nav-sub a:hover {
+    border-bottom-color: var(--gold);
+  }
+}
+
 /* Second row: the pages of the current section. */
 .subnav {
   display: flex;
@@ -999,6 +1040,189 @@ a:hover {
   line-height: 1.4;
   font-style: italic;
   color: var(--ink-dim);
+}
+
+/* ---------- explainer (themself) ---------- */
+
+.gap-box {
+  padding: 24px 24px 22px;
+  border: 1px solid var(--paper-line);
+  outline: 1px solid var(--leaf-gold);
+  outline-offset: -6px;
+}
+
+.gap-first {
+  margin: 0 0 6px;
+  color: var(--rubric);
+}
+
+.gap-context {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+.gap-sentence {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.gap {
+  display: inline-block;
+  min-width: 5.5em;
+  padding: 0 0.2em;
+  text-align: center;
+  border-bottom: 2px solid var(--rubric);
+}
+
+.gap.filled {
+  color: var(--paper);
+  background: var(--rubric);
+}
+
+.gap-ask {
+  margin: 18px 0 0;
+  color: var(--ink-dim);
+}
+
+.gap-box .quiz-choices {
+  margin-top: 8px;
+}
+
+.gap-box .quiz-choices button {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+}
+
+.gap-quote,
+.explainer-voice blockquote {
+  margin: 10px 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--rubric);
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.explainer-voice {
+  margin: 4px 0 8px;
+  max-width: 36em;
+}
+
+.explainer-voice figcaption {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+.explainer h3 {
+  margin: 26px 0 6px;
+  max-width: 30em;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.meter-caption {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+.meters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 36em;
+  margin: 0 0 14px;
+}
+
+.meter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px;
+  gap: 2px 12px;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.meter span {
+  grid-column: 1 / -1;
+}
+
+.meter .track {
+  height: 10px;
+  background: var(--paper-line);
+}
+
+.meter .track i {
+  display: block;
+  height: 100%;
+  background: var(--rubric);
+}
+
+.meter b {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.meter-group {
+  margin: 0 0 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.meter-kind {
+  margin: 0 0 8px;
+  max-width: 36em;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.meter-kind strong {
+  margin-right: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+.meter-kind span,
+.meter-kind q {
+  font-style: italic;
+  color: var(--ink-dim);
+}
+
+/* The examples are English whatever the page language. */
+.meter-kind q {
+  quotes: '“' '”';
+}
+
+/* Only the regular and medium weights of the text face are loaded. */
+.quiz-solution strong,
+.gap-box strong {
+  font-weight: 500;
+}
+
+.sheet-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button em {
+  font-style: italic;
 }
 
 /* ---------- blog tags ---------- */

@@ -22,9 +22,10 @@ export function menu(lang) {
       key: 'research',
       label: t.nav.research,
       path: '/publications/',
-      pages: ['publications', 'they'],
+      pages: ['publications', 'themself', 'they'],
       sub: [
         { key: 'publications', label: t.nav.publications, path: '/publications/' },
+        { key: 'themself', label: t.subThemself, path: '/themself/' },
         { key: 'they', label: t.subThey, path: '/they/' },
       ],
     },

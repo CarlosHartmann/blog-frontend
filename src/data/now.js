@@ -8,9 +8,9 @@
 const stars = (rating) => '★'.repeat(Math.floor(rating)) + (rating % 1 ? '½' : '');
 
 const films = [
-  { title: 'The Devils', rating: 5, url: 'https://boxd.it/1inI', de: 'Ken Russell, 1971 · der Director’s Cut ist 2026 erschienen und ein merklich verbesserter Film, und aktueller denn je.', en: 'Ken Russell, 1971 · the director’s cut came out in 2026 and is a markedly improved film, and more topical than ever.' },
-  { title: 'Teenage Sex and Death at Camp Miasma', rating: 4.5, url: 'https://boxd.it/L9GS' },
-  { title: 'The Odyssey', rating: 4.5, url: 'https://boxd.it/QFQU' },
+  { title: 'The Devils', rating: 5, url: 'https://boxd.it/1inI', de: 'Ken Russell, 1971 · der Director’s Cut ist 2026 erschienen und ein merklich verbesserter Film, und aktueller denn je; eine Warnung vor politisierter Prüderie und Aberglauben.', en: 'Ken Russell, 1971 · the director’s cut came out in 2026 and is a markedly improved film, and more topical than ever; a warning against politicized prudery and superstition.' },
+  { title: 'Teenage Sex and Death at Camp Miasma', rating: 4.5, url: 'https://boxd.it/L9GS', de: 'Jane Schoenbrun, 2026 · Ein campig-heiterer und satirischer Spass, nichts für prüde Nerven!', en: 'Jane Schoenbrun, 2026 · A campy, cheerful and satirical romp, not for prudish nerves!' },
+  { title: 'The Odyssey', rating: 4.5, url: 'https://boxd.it/QFQU', de: 'Christopher Nolan, 2026 · Einigen Amerikanismen zum Trotz eine ästhetisch sehr gelungene Adaption, Nolan kann es noch!', en: 'Christopher Nolan, 2026 · Some Americanisms notwithstanding, an aesthetically very successful adaptation. Nolan still has it!' },
 ];
 
 const filmItems = (lang) => films.map((film) => ({ when: stars(film.rating), what: film.title, url: film.url, detail: film[lang], lang: 'en' }));

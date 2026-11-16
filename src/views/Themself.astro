@@ -1,0 +1,160 @@
+---
+// "themself or themselves?": an explainer of the article, opened by one
+// fill-in-the-gap question. Texts and figures live in src/data/themself.js.
+// Without JavaScript the solution can be opened by hand.
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/i18n.js';
+import { figures, quotes, copy } from '../data/themself.js';
+
+const { lang } = Astro.props;
+const c = copy[lang];
+const s = c.sections;
+const num = (value) => (lang === 'de' ? String(value).replace('.', ',') : String(value));
+const plain = (html) => html.replace(/<[^>]+>/g, '');
+const kinds = ['plural', 'generic', 'specific'];
+const ids = { what: 'worum', data: 'daten', results: 'ergebnisse', why: 'warum', more: 'nachlesen' };
+---
+
+<Base lang={lang} path="/themself/" title={plain(c.title)} description={plain(c.lede)} current="themself">
+  <main id="inhalt" class="page">
+    <div class="leaf-grid">
+      <aside class="side">
+        <nav aria-label={plain(c.title)}>
+          {Object.keys(ids).map((key) => <a href={`#${ids[key]}`}>{s[key].title}</a>)}
+        </nav>
+      </aside>
+
+      <section class="paper">
+        <p class="kicker mono">{c.kicker}</p>
+        <h1 class="title" set:html={c.title} />
+        <p class="lede" set:html={c.lede} />
+        <div class="rule" aria-hidden="true"></div>
+
+        <div class="gap-box" id="gap-box">
+          <p class="mono gap-first">{c.first}</p>
+          <p class="gap-context">{c.gapContext}</p>
+          <p class="gap-sentence" lang="en">
+            {quotes.gap[0]}<span class="gap" id="gap">&nbsp;</span>{quotes.gap[1]}
+          </p>
+          <p class="mono gap-ask">{c.gapAsk}</p>
+          <div class="quiz-choices">
+            <button type="button" data-word="themselves" lang="en">themselves</button>
+            <button type="button" data-word="themself" lang="en">themself</button>
+          </div>
+          <details class="quiz-solution" id="gap-solution">
+            <summary>{c.solution}</summary>
+            <p id="gap-chose" hidden>
+              {c.youChose} <strong lang="en" id="gap-word"></strong>
+            </p>
+            <p set:html={c.noWrong} />
+            <blockquote class="gap-quote" lang="en">{quotes.gapFull}</blockquote>
+            <p>{c.bothForms}</p>
+            <p set:html={c.others} />
+            <div class="meters">
+              {
+                c.groups.map((group, index) => (
+                  <div class="meter">
+                    <span>{group}</span>
+                    <div class="track">
+                      <i style={`width:${figures.share.specific[index]}%`} />
+                    </div>
+                    <b>{figures.share.specific[index]} %</b>
+                  </div>
+                ))
+              }
+            </div>
+          </details>
+        </div>
+
+        <div class="entries sheet explainer">
+          <h2 id={ids.what}><span class="hash" aria-hidden="true">#</span>{s.what.title}</h2>
+          {s.what.text.map((paragraph) => <p class="sheet-text" set:html={paragraph} />)}
+          <figure class="explainer-voice">
+            <blockquote lang="en">{quotes.voice}</blockquote>
+            <figcaption>{s.what.voiceSource}</figcaption>
+          </figure>
+
+          <h2 id={ids.data}><span class="hash" aria-hidden="true">#</span>{s.data.title}</h2>
+          {s.data.text.map((paragraph) => <p class="sheet-text" set:html={paragraph} />)}
+
+          <h2 id={ids.results}><span class="hash" aria-hidden="true">#</span>{s.results.title}</h2>
+
+          <h3 set:html={`1. ${s.results.rare}`} />
+          <p class="meter-caption" set:html={s.results.rareCaption} />
+          <div class="meters">
+            {
+              c.groups.map((group, index) => (
+                <div class="meter">
+                  <span>{group}</span>
+                  <div class="track">
+                    <i style={`width:${figures.ratio[index] * 10}%`} />
+                  </div>
+                  <b>{num(figures.ratio[index].toFixed(1))}</b>
+                </div>
+              ))
+            }
+          </div>
+          <p class="sheet-text" set:html={s.results.rareText} />
+
+          <h3 set:html={`2. ${s.results.depends}`} />
+          <p class="meter-caption" set:html={s.results.dependsCaption} />
+          {
+            kinds.map((kind) => (
+              <div class="meter-group">
+                <p class="meter-kind">
+                  <strong>{s.results.kinds[kind].label}</strong> <span>{s.results.kinds[kind].note}</span>
+                  {quotes[kind] && <q lang="en">{quotes[kind]}</q>}
+                </p>
+                <div class="meters">
+                  {c.groups.map((group, index) => (
+                    <div class="meter">
+                      <span>{group}</span>
+                      <div class="track">
+                        <i style={`width:${figures.share[kind][index]}%`} />
+                      </div>
+                      <b>{figures.share[kind][index]} %</b>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+          <p class="sheet-text" set:html={s.results.dependsText} />
+
+          <h3 set:html={`3. ${s.results.still}`} />
+          <p class="sheet-text" set:html={s.results.stillText} />
+
+          <h3 set:html={`4. ${s.results.rising}`} />
+          <p class="sheet-text" set:html={s.results.risingText} />
+
+          <h2 id={ids.why}><span class="hash" aria-hidden="true">#</span>{s.why.title}</h2>
+          {s.why.text.map((paragraph) => <p class="sheet-text" set:html={paragraph} />)}
+
+          <h2 id={ids.more}><span class="hash" aria-hidden="true">#</span>{s.more.title}</h2>
+          <p class="cv-links mono" style="margin-top: 0">
+            <a href={figures.article}>{s.more.article}</a>
+            <a href={figures.dataset}>{s.more.dataset}</a>
+            <a href={href(lang, '/they/')} set:html={s.more.quiz} />
+          </p>
+          <p class="quiz-note">{s.more.note}</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script is:inline>
+    (() => {
+      const box = document.getElementById('gap-box');
+      box.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-word]');
+        if (!button) return;
+        const gap = document.getElementById('gap');
+        gap.textContent = button.dataset.word;
+        gap.classList.add('filled');
+        for (const other of box.querySelectorAll('button[data-word]')) other.classList.toggle('answer', other === button);
+        document.getElementById('gap-word').textContent = button.dataset.word;
+        document.getElementById('gap-chose').hidden = false;
+        document.getElementById('gap-solution').open = true;
+      });
+    })();
+  </script>
+</Base>

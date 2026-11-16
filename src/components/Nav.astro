@@ -2,10 +2,12 @@
 // Main navigation plus the language switch. `path` is the German path of the
 // current page, so the switch can point at the same page in the other language.
 // `current` is the key of the current page (see src/lib/menu.js).
+// With `flyout` (the landing page) an entry shows its sub-pages when the
+// pointer is over it or the keyboard focus is inside it.
 import { ui, href } from '../lib/i18n.js';
 import { menu } from '../lib/menu.js';
 
-const { lang, path = '/', current = '' } = Astro.props;
+const { lang, path = '/', current = '', flyout = false } = Astro.props;
 const t = ui[lang];
 const here = (entry) => {
   if (!entry.pages.includes(current)) return undefined;
@@ -15,11 +17,24 @@ const here = (entry) => {
 
 <nav class="site-nav mono" aria-label={t.navLabel}>
   {
-    menu(lang).map((entry) => (
-      <a href={href(lang, entry.path)} aria-current={here(entry)}>
-        {entry.label}
-      </a>
-    ))
+    menu(lang).map((entry) =>
+      flyout && entry.sub ? (
+        <span class="nav-item">
+          <a href={href(lang, entry.path)} aria-current={here(entry)}>
+            {entry.label}
+          </a>
+          <span class="nav-sub">
+            {entry.sub.map((item) => (
+              <a href={href(lang, item.path)}>{item.label}</a>
+            ))}
+          </span>
+        </span>
+      ) : (
+        <a href={href(lang, entry.path)} aria-current={here(entry)}>
+          {entry.label}
+        </a>
+      ),
+    )
   }
   <a class="lang" href={href(t.other, path)} hreflang={t.other} lang={t.other} aria-label={t.switchTo}>{t.switchShort}</a>
 </nav>
