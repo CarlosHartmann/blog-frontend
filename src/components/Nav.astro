@@ -1,27 +1,23 @@
 ---
 // Main navigation plus the language switch. `path` is the German path of the
 // current page, so the switch can point at the same page in the other language.
+// `current` is the key of the current page (see src/lib/menu.js).
 import { ui, href } from '../lib/i18n.js';
+import { menu } from '../lib/menu.js';
 
 const { lang, path = '/', current = '' } = Astro.props;
 const t = ui[lang];
-const items = [
-  ['home', '/'],
-  ['now', '/now/'],
-  ['blog', '/posts/'],
-  ['publications', '/publications/'],
-  ['cv', '/cv/'],
-  ['feedback', '/feedback/'],
-  ['about', '/about/'],
-  ['contact', '/contact/'],
-];
+const here = (entry) => {
+  if (!entry.pages.includes(current)) return undefined;
+  return current === entry.pages[0] ? 'page' : 'true';
+};
 ---
 
 <nav class="site-nav mono" aria-label={t.navLabel}>
   {
-    items.map(([key, target]) => (
-      <a href={href(lang, target)} aria-current={current === key ? 'page' : undefined}>
-        {t.nav[key]}
+    menu(lang).map((entry) => (
+      <a href={href(lang, entry.path)} aria-current={here(entry)}>
+        {entry.label}
       </a>
     ))
   }

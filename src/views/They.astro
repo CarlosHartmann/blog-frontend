@@ -68,11 +68,10 @@ const hint = (key) => choices[key][de ? 'hintDe' : 'hintEn'];
 const order = ['plural', 'generic', 'singular'];
 ---
 
-<Base lang={lang} path="/they/" title={text.title.replace(/<[^>]+>/g, '')} description={text.lede.replace(/<[^>]+>/g, '')} current="publications">
+<Base lang={lang} path="/they/" title={text.title.replace(/<[^>]+>/g, '')} description={text.lede.replace(/<[^>]+>/g, '')} current="they">
   <main id="inhalt" class="page">
     <div class="leaf-grid">
       <aside class="side">
-        <a class="back" href={href(lang, '/publications/')}>← {t.nav.publications}</a>
       </aside>
 
       <section class="paper">

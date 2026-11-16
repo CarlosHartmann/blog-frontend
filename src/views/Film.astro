@@ -23,11 +23,10 @@ const sections = [
 ].filter((section) => section.posts.length);
 ---
 
-<Base lang={lang} path="/film/" title={t.filmTitle} description={t.filmIntro} current="blog">
+<Base lang={lang} path="/film/" title={t.filmTitle} description={t.filmIntro} current="film">
   <main id="inhalt" class="page">
     <div class="leaf-grid">
       <aside class="side">
-        <a class="back" href={href(lang, '/posts/')}>← {t.backToBlog}</a>
         <nav aria-label={t.pubsSections}>
           {sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
           <a href="#anderswo">{t.filmElsewhere}</a>

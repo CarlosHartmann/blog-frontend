@@ -153,9 +153,36 @@ a:hover {
   border-bottom: 1px solid transparent;
 }
 
-.site-nav a[aria-current='page'] {
+.site-nav a[aria-current] {
   color: var(--gold);
   border-bottom-color: var(--gold);
+}
+
+/* Second row: the pages of the current section. */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 26px;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--ground-line);
+  background: var(--ground-raised);
+}
+
+.subnav a {
+  padding: 11px 0;
+  color: var(--on-ground-dim);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.subnav a:hover {
+  color: var(--gold);
+}
+
+.subnav a[aria-current='page'] {
+  color: var(--on-ground);
+  border-bottom-color: var(--on-ground-dim);
 }
 
 .site-nav .lang {
@@ -1336,6 +1363,12 @@ a:hover {
 
   .site-nav {
     gap: 0 18px;
+  }
+
+  .subnav {
+    justify-content: flex-start;
+    gap: 0 18px;
+    padding: 0 18px;
   }
 
   .page {

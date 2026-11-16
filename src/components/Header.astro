@@ -1,11 +1,25 @@
 ---
 import Nav from './Nav.astro';
 import { href } from '../lib/i18n.js';
+import { menu } from '../lib/menu.js';
 
 const { lang, path, current } = Astro.props;
+// The second row: the pages of the section the current page belongs to.
+const section = menu(lang).find((entry) => entry.sub && entry.pages.includes(current));
 ---
 
 <header class="site-header">
   <a class="wordmark" href={href(lang, '/')}>smog.sh<span class="cursor" aria-hidden="true"></span></a>
   <Nav lang={lang} path={path} current={current} />
 </header>
+{
+  section && (
+    <nav class="subnav mono" aria-label={section.label}>
+      {section.sub.map((item) => (
+        <a href={href(lang, item.path)} aria-current={item.key === current ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
