@@ -32,11 +32,11 @@ export function menu(lang) {
     {
       key: 'teaching',
       label: t.nav.teaching,
-      path: '/teaching/',
-      pages: ['teaching', 'feedback'],
+      path: '/feedback/',
+      pages: ['feedback', 'teaching'],
       sub: [
-        { key: 'teaching', label: t.subSendoffs, path: '/teaching/' },
         { key: 'feedback', label: t.nav.feedback, path: '/feedback/' },
+        { key: 'teaching', label: t.subSendoffs, path: '/teaching/' },
       ],
     },
     {
